@@ -15,15 +15,17 @@ file: TARGET = file
 file: dynamic static
 
 prebuild:
-	mkdir -p $(OUTPUT_DIR)$(TARGET)
+	@mkdir -p $(OUTPUT_DIR)$(TARGET)
 
 dynamic: prebuild
-	$(CC) -c $(SOURCES) $(CFLAGS) -o $(OUTPUT_DIR)$(TARGET)/isotope.o
-	$(AR) rcs $(OUTPUT_DIR)$(TARGET)/libisotope.a $(OUTPUT_DIR)$(TARGET)/isotope.o
+	@echo " - Building Dynamic Library - libisotope.a"
+	@$(CC) -c $(SOURCES) $(CFLAGS) -o $(OUTPUT_DIR)$(TARGET)/isotope.o
+	@$(AR) rcs $(OUTPUT_DIR)$(TARGET)/libisotope.a $(OUTPUT_DIR)$(TARGET)/isotope.o
 
 static: prebuild
-	$(CC) -c -fPIC $(SOURCES) $(CFLAGS) -o $(OUTPUT_DIR)$(TARGET)/isotope.o
-	$(CC) -shared -Wl,-soname,libisotope.so.1 -o $(OUTPUT_DIR)$(TARGET)/libisotope.so.1.0.1 $(OUTPUT_DIR)$(TARGET)/isotope.o
+	@echo " - Building Static Library - libisotope.so"
+	@$(CC) -c -fPIC $(SOURCES) $(CFLAGS) -o $(OUTPUT_DIR)$(TARGET)/isotope.o
+	@$(CC) -shared -Wl,-soname,libisotope.so -o $(OUTPUT_DIR)$(TARGET)/libisotope.so $(OUTPUT_DIR)$(TARGET)/isotope.o
 
 clean:
-	rm -R ../../../build/libs/c/
+	@rm -Rf ../../../build/libs/c/
