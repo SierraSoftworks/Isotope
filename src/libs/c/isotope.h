@@ -40,7 +40,7 @@ char isotope_mouse(int isotope, char buttons, char deltaX, char deltaY, char del
  * @param keys[] The physical keyboard keys who's depression should be emulated.
  * @param keys_count The number of physical keyboard keys to be emulated (max of 6).
  */
-char isotope_keyboard(int isotope, char modifiers, const char[] keys, char keys_count);
+char isotope_keyboard(int isotope, char modifiers, const char keys[], char keys_count);
 
 /**
  * Sends a joystick emulation request using the given Isotope.

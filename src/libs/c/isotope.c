@@ -104,7 +104,7 @@ char isotope_mouse(int isotope, char buttons, char deltaX, char deltaY, char del
 	return isotope_write(isotope, packet, length + 1);
 }
 
-char isotope_keyboard(int isotope, char modifiers, const char* keys, char keys_count) {
+char isotope_keyboard(int isotope, char modifiers, const char keys[], char keys_count) {
 	char packet[8] = { 0x20 }, i = 0;
 	packet[1] = modifiers;
 
