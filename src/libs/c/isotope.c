@@ -31,12 +31,13 @@ int isotope_open(const char* device) {
 	int uart;
 
 	#ifdef ISOTOPE_FIO // f Prefixed IO operations (fopen, fclose etc.)
-	uart = (int)fopen(device, 'w');
-	if(!uart) return NULL;
+	uart = (int)fopen(device, "w");
+	if(!uart) return 0;
+	#endif
 
-	#elif ISOTOPE_IO // Standard IO operations
-	uart = open(device, O_WRONLY | O_NOCTTY | O_NDELAY)
-	if(-1 == uart) return NULL;
+	#ifdef ISOTOPE_IO // Standard IO operations
+	uart = open(device, O_WRONLY | O_NOCTTY | O_NDELAY);
+	if(-1 == uart) return 0;
 	#endif
 
 	/**
@@ -52,8 +53,8 @@ int isotope_open(const char* device) {
 	options.c_iflag = IGNPAR;
 	options.c_oflag = 0;
 	options.c_lflag = 0;
-	tcflush(uart0_filestream, TCIFLUSH);
-	tcsetattr(uart0_filestream, TCSANOW, &options);
+	tcflush(uart, TCIFLUSH);
+	tcsetattr(uart, TCSANOW, &options);
 	#endif
 
 	return uart;
@@ -62,7 +63,8 @@ int isotope_open(const char* device) {
 char isotope_close(int handle) {
 	#ifdef ISOTOPE_FIO
 	return (char)fclose((FILE*)handle);
-	#elif ISOTOPE_IO
+	#endif
+	#ifdef ISOTOPE_IO
 	return close(handle);
 	#endif
 }
@@ -70,7 +72,8 @@ char isotope_close(int handle) {
 char isotope_write(int isotope, const char* packet, char packet_length) {
 	#ifdef ISOTOPE_FIO
 	return fwrite(packet, sizeof(char), packet_length, (FILE*)isotope);
-	#elif ISOTOPE_IO
+	#endif
+	#ifdef ISOTOPE_IO
 	return write(isotope, packet, packet_length);
 	#endif
 }
@@ -101,7 +104,7 @@ char isotope_mouse(int isotope, char buttons, char deltaX, char deltaY, char del
 	return isotope_write(isotope, packet, length + 1);
 }
 
-char isotope_keyboard(int isotope, char modifiers, const char[] keys, char keys_count) {
+char isotope_keyboard(int isotope, char modifiers, const char* keys, char keys_count) {
 	char packet[8] = { 0x20 }, i = 0;
 	packet[1] = modifiers;
 
