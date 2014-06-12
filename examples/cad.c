@@ -7,6 +7,10 @@
  * IMPORTANT
  * Ensure that you are using the RPi build of the isotope library or
  * you may encounter issues with the UART not being configured correctly.
+ * 
+ * > gcc ../builds/libs/c/rpi/isotope.o cad.c -o cad
+ * > chmod +x cad
+ * > ./cad
  */
 
 #include "../src/libs/c/keys.h"
