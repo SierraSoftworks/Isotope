@@ -8,17 +8,20 @@
  * Ensure that you are using the RPi build of the isotope library or
  * you may encounter issues with the UART not being configured correctly.
  * 
- * > gcc ../builds/libs/c/rpi/isotope.o cad.c -o cad
- * > chmod +x cad
- * > ./cad
+ * Object Linking
+ * > gcc -o cad ../build/libs/c/rpi/isotope.o cad.c
+ * Static Linking
+ * > gcc -static -L../build/libs/c/rpi/ -lisotope -o cad cad.c
+ * Dynamic Linking
+ * > gcc -L../build/libs/c/rpi/ -lisotope -o cad cad.c
  */
 
-#include "../src/libs/c/keys.h"
+#include "../src/libs/c/keylayouts.h"
 #include "../src/libs/c/isotope.h"
 
 int main() {
 	int isotope;
-	char[] keys = { KEY_DELETE };
+	char keys[] = { KEY_DELETE };
 
 	isotope = isotope_open("/dev/ttyAMA0");
 	if(!isotope) return 1;
