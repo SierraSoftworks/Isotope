@@ -1,7 +1,7 @@
 #ifndef ISOTOPE_C
 #define ISOTOPE_C
 
-#include "isotope.c"
+#include "isotope.h"
 #include <stdio.h>
 
 #ifdef RPI
@@ -50,7 +50,7 @@ int isotope_open(const char* device) {
 
 	tcgetattr(uart, &options);
 	options.c_cflag = B115200 | CS8 | CLOCAL;		//<Set baud rate
-	options.c_iflag = IGNPAR;
+	options.c_iflag = PARENB;
 	options.c_oflag = 0;
 	options.c_lflag = 0;
 	tcflush(uart, TCIFLUSH);
