@@ -3,7 +3,7 @@
 #define OP_MOUSE 0x2
 #define OP_JOYSTICK 0x3
 
-char rx_buffer[16] = {0};
+char rx_buffer[32] = {0};
 
 // Handler functions
 void on_custom();
@@ -12,6 +12,7 @@ void on_mouse();
 void on_joystick();
 
 // Protocol utility functions
+char read_blocking();
 char proto_opcode(char header);
 char proto_args(char header);
 short proto_short(char start);
@@ -23,23 +24,34 @@ void setup() {
   
   // Enable manual mode for Joystick timing
   Joystick.useManualSend(true);
+  
+  // Turn on the LED
+  pinMode(11, OUTPUT);
+  digitalWrite(11, LOW);
 }
 
 void loop() {  
   char i, opcode, args;
   
+  if(!Serial1.available()) return;
+  
+  digitalWrite(11, HIGH);
+  
   // Reset the buffer
-  for(i = 0; i < 16; i++) rx_buffer[i] = 0;
+  for(i = 0; i < 32; i++) rx_buffer[i] = 0;
   
   // Read the header
-  rx_buffer[0] = Serial1.read();
+  rx_buffer[0] = read_blocking();
+  
+  // We sometimes recieve invalid codes at the begining of messages, ignore them
+  while(proto_opcode(rx_buffer[0]) > 0x3) rx_buffer[0] = read_blocking();
   
   // Process the header values and store their outputs
   opcode = proto_opcode(rx_buffer[0]);
   args = proto_args(rx_buffer[0]);
   
   // Read the arguments
-  for(i = 1; i <= args; i++) rx_buffer[i] = Serial1.read();
+  for(i = 1; i <= args; i++) rx_buffer[i] = read_blocking();
   
   // Call the function responsible for the relevant op-code
   switch(opcode) {
@@ -55,12 +67,15 @@ void loop() {
     case OP_JOYSTICK:
       on_joystick();
       break;
+     default:
+      break;
   }
+  
+  digitalWrite(11, LOW);
 }
 
 // Handler functions
 void on_custom() {
-  
 }
 
 void on_keyboard() {
@@ -113,8 +128,13 @@ void on_joystick() {
 }
 
 // Utility functions
+char read_blocking() {
+  while(!Serial1.available());
+  return Serial1.read();
+}
+
 char proto_opcode(char header) {
-  return (header & 0xE) >> 5;
+  return (header & 0xE0) >> 5;
 }
 
 char proto_args(char header) {
