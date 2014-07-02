@@ -1,14 +1,14 @@
-var Isotope = require('isotope'),
+var Isotope = require('libisotope'),
 	http = require('http'),
 	url = require('url');
 
 var isotope = new Isotope("/dev/ttyAMA0");
 
 http.createServer(function(req, res) {
-	var req.url = url.parse(req.url, true);
+	req.url = url.parse(req.url, true);
 
 	var page = [
-		'<html>'
+		'<html>',
 			'<head><title>Isotope Test</title></head>',
 			'<body>',
 				'<p>Enter some text, press Type and it will be typed in 5 seconds</p>',
