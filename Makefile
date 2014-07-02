@@ -24,3 +24,7 @@ examples_c:
 examples_js:
 	@echo "Setting up JS examples"
 	@cd examples/js/; make deps
+
+publish:
+	@echo "Publishing libraries"
+	@cd src/libs/js/; npm publish
