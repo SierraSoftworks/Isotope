@@ -23,7 +23,8 @@ examples_c:
 
 examples_js:
 	@echo "Setting up JS examples"
-	@cd examples/js/; make deps
+	@mkdir -p examples/js/node_modules/libisotope
+	@cp -R src/libs/js/* examples/js/node_modules/libisotope 
 
 publish:
 	@echo "Publishing libraries"
