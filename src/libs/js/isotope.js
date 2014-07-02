@@ -26,9 +26,9 @@ function Isotope(device) {
 		this.open = true;
 		if(!this.writeInterval) {
 			this.writeInterval = setInterval((function() {
-				while(this.buffer.length)
+				if(this.buffer.length)
 					this.uart.write(this.buffer.shift());
-			}).bind(this), 5);
+			}).bind(this), 2);
 			this.writeInterval.unref();
 		}
 		this.emit('open');
