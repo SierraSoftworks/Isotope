@@ -43,8 +43,12 @@ void loop() {
   // Read the header
   rx_buffer[0] = read_blocking();
   
-  // We sometimes recieve invalid codes at the begining of messages, ignore them
-  while(proto_opcode(rx_buffer[0]) > 0x3) rx_buffer[0] = read_blocking();
+  // 0xF8 is the initial "startup" byte sent when we first open
+  // a connection, ignore it.
+  if(rx_buffer[0] == 0xf8) {
+    digitalWrite(11, LOW);
+    return;
+  }
   
   // Process the header values and store their outputs
   opcode = proto_opcode(rx_buffer[0]);
