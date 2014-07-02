@@ -1,4 +1,4 @@
-var Isotope = require('isotope');
+var Isotope = require('libisotope');
 var isotope = new Isotope("/dev/ttyAMA0");
 isotope.on('open', function() {
 	isotope.keyboard.ctrl.alt.press(Isotope.keyboard.keys.delete).then.releaseAll.now();

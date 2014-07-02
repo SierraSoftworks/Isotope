@@ -6,7 +6,7 @@ Isotope is a project designed to permit the emulation of USB HID (Human Input De
 ## Example
 
 ```javascript
-var Isotope = require('isotope');
+var Isotope = require('libisotope');
 var iso = new Isotope('/dev/ttyAMA0');
 iso.on('open', function() {
 	iso.keyboard.write("Hello World!").then
