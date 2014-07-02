@@ -1,12 +1,12 @@
 {
-	"name": "libisotope",
-	"author": "Benjamin Pannell <admin@sierrasoftworks.com>",
-	"version": "1.0.0",
-	"description": "A Node.js port of the Isotope USB input emulation library, allowing Keyboard/Mouse emulation through an ATmega32u4.",
-	"licence": "MIT",
-	"repository": "https://git.sierrasoftworks.com/stellenbosch/isotope",
-	"main": "./isotope.js",
-	"dependencies": {
-		"serialport": "*"
-	}
+  "name": "libisotope",
+  "author": "Benjamin Pannell <admin@sierrasoftworks.com>",
+  "version": "1.0.1",
+  "description": "A Node.js port of the Isotope USB input emulation library, allowing Keyboard/Mouse emulation through an ATmega32u4.",
+  "licence": "MIT",
+  "repository": "https://git.sierrasoftworks.com/stellenbosch/isotope",
+  "main": "./isotope.js",
+  "dependencies": {
+    "serialport": "*"
+  }
 }
