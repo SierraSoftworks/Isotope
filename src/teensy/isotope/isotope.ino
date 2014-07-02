@@ -1,3 +1,5 @@
+#define READ_TIMEOUT 5000
+
 #define OP_CUSTOM 0x00
 #define OP_KEYBOARD 0x1
 #define OP_MOUSE 0x2
@@ -12,7 +14,7 @@ void on_mouse();
 void on_joystick();
 
 // Protocol utility functions
-char read_blocking();
+char read_blocking(char* target, int max_attempts);
 char proto_opcode(char header);
 char proto_args(char header);
 short proto_short(char start);
@@ -41,21 +43,22 @@ void loop() {
   for(i = 0; i < 32; i++) rx_buffer[i] = 0;
   
   // Read the header
-  rx_buffer[0] = read_blocking();
-  
-  // 0xF8 is the initial "startup" byte sent when we first open
-  // a connection, ignore it.
-  if(rx_buffer[0] == 0xf8) {
+  if(!read_blocking(rx_buffer, READ_TIMEOUT)) {
     digitalWrite(11, LOW);
     return;
   }
+  
   
   // Process the header values and store their outputs
   opcode = proto_opcode(rx_buffer[0]);
   args = proto_args(rx_buffer[0]);
   
   // Read the arguments
-  for(i = 1; i <= args; i++) rx_buffer[i] = read_blocking();
+  for(i = 1; i <= args; i++)
+    if(!read_blocking(rx_buffer + i, READ_TIMEOUT)) {
+      digitalWrite(11, LOW);
+      return;
+    }
   
   // Call the function responsible for the relevant op-code
   switch(opcode) {
@@ -132,9 +135,17 @@ void on_joystick() {
 }
 
 // Utility functions
-char read_blocking() {
-  while(!Serial1.available());
-  return Serial1.read();
+char read_blocking(char* target, int max_attempts) {
+  byte tmp;
+  while(max_attempts--) {
+    if(!Serial1.available()) continue;
+    tmp = Serial1.read();
+    if(tmp == 0xf8) continue;
+    
+    *target = tmp;
+    return 1;
+  }
+  return 0;
 }
 
 char proto_opcode(char header) {
