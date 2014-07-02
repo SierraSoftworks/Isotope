@@ -8,6 +8,10 @@ var Keyboard = require('./helpers/Keyboard'),
 module.exports = Isotope;
 
 function Isotope(device) {
+	this.open = false;
+	this.buffer = [];
+	this.writeInterval = null;
+
 	if(typeof device == "string")
 		this.uart = new SerialPort(device, {
 			baudrate: 115200,
@@ -19,16 +23,28 @@ function Isotope(device) {
 	this.mouse = new Mouse(this);
 
 	this.uart.on('open', (function() {
+		this.open = true;
+		if(!this.writeInterval) {
+			this.writeInterval = setInterval((function() {
+				while(this.buffer.length)
+					this.uart.write(this.buffer.shift());
+			}).bind(this), 5);
+			this.writeInterval.unref();
+		}
 		this.emit('open');
 	}).bind(this));
 
 	this.uart.on('data', (function(data) {
-		console.log("Got: %s", data.toString('hex'));
+		console.log("%s", data.toString('hex'));
 		this.emit('data', data);
 	}).bind(this));
 
 	this.uart.on('close', (function() {
 		this.emit('close');
+		if(this.writeInterval) {
+			clearInterval(this.writeInterval);
+			this.writeInterval = null;
+		}
 	}).bind(this));
 
 	this.uart.on('error', (function(err) {
@@ -42,7 +58,7 @@ Isotope.keyboard = require('./keycodes/keyboard');
 Isotope.mouse = require('./keycodes/mouse');
 
 Isotope.prototype.send = function(packet) {
-	this.uart.write(packet);
+	this.buffer.push(packet);
 };
 
 Isotope.prototype.mouseRaw = function(buttons, deltaX, deltaY, deltaScroll) {
