@@ -11,7 +11,7 @@ function Isotope(device) {
 	this.open = false;
 	this.buffer = [];
 	this.writeInterval = null;
-	this.bundleSize = 8;
+	this.bundleSize = 4;
 
 	if(typeof device == "string")
 		this.uart = new SerialPort(device, {
@@ -28,7 +28,7 @@ function Isotope(device) {
 		if(!this.writeInterval) {
 			this.writeInterval = setInterval((function() {
 				this.flush(this.bundleSize);
-			}).bind(this), 1);
+			}).bind(this), 2);
 			this.writeInterval.unref();
 		}
 		this.emit('open');
