@@ -1,4 +1,4 @@
-all: clean libisotope_c examples_c
+all: clean libisotope_c examples_c libisotope_js examples_js
 
 clean:
 	rm -Rf build/
