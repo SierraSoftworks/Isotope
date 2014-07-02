@@ -1,0 +1,9 @@
+{
+	"name": "isotope_examples",
+	"version": "1.0.0",
+	"description": "A set of examples for how to use Isotope in Node.js",
+	"private": "true",
+	"dependencies": {
+		"isotope": "*"
+	}
+}
