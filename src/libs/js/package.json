@@ -1,0 +1,12 @@
+{
+	"name": "isotope",
+	"author": "Benjamin Pannell <admin@sierrasoftworks.com>",
+	"version": "1.0.0",
+	"description": "A Node.js port of the Isotope USB input emulation library, allowing Keyboard/Mouse emulation through an ATmega32u4.",
+	"licence": "MIT",
+	"private": true,
+	"repository": "https://git.sierrasoftworks.com/stellenbosch/isotope",
+	"dependencies": {
+		"serialport": "*"
+	}
+}

@@ -1,0 +1,5 @@
+module.exports = {
+	left: 0x1,
+	middle: 0x4,
+	right: 0x2
+};
