@@ -119,8 +119,8 @@ Keyboard.prototype.write = function(text) {
 		if(~(index = charMap.immutable.indexOf(c))) this.isotope.keyboardRaw(0, [codeMap.immutable[index]]);
 		else if(~(index = charMap.normal.indexOf(c))) this.isotope.keyboardRaw(0, [codeMap.mutable[index]]);
 		else if(~(index = charMap.shifted.indexOf(c))) this.isotope.keyboardRaw(keyCodes.modifiers.shift, [codeMap.mutable[index]]);
-		this.isotope.keyboardRaw();
 	}
+	this.isotope.keyboardRaw();
 	return this;
 };
 
