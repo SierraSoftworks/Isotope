@@ -28,4 +28,4 @@ static: prebuild
 	@$(CC) -shared -Wl,-soname,libisotope.so -o $(OUTPUT_DIR)$(TARGET)/libisotope.so $(OUTPUT_DIR)$(TARGET)/isotope.o
 
 clean:
-	@rm -Rf ../../../build/libs/c/
+	@rm -Rf $(OUTPUT_DIR)

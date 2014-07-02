@@ -16,8 +16,8 @@
  * > gcc -L../build/libs/c/rpi/ -lisotope -o hello hello.c
  */
 
-#include "../src/libs/c/keylayouts.h"
-#include "../src/libs/c/isotope.h"
+#include "../../src/libs/c/keylayouts.h"
+#include "../../src/libs/c/isotope.h"
 #include <unistd.h>
 
 int main() {

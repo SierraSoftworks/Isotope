@@ -16,8 +16,8 @@
  * > gcc -L../build/libs/c/rpi/ -lisotope -o mouse mouse.c
  */
 
-#include "../src/libs/c/keylayouts.h"
-#include "../src/libs/c/isotope.h"
+#include "../../src/libs/c/keylayouts.h"
+#include "../../src/libs/c/isotope.h"
 #include <stdio.h>
 
 int main() {
