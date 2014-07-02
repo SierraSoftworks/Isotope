@@ -79,6 +79,7 @@ Isotope.prototype.keyboardRaw = function(modifiers, keys) {
 	for(var i = 0; i < keys.length; i++)
 		packet[i + 2] = keys[i];
 
+	packet[0] |= keys.length + 1;
 	this.send(packet.slice(0, 2 + keys.length));
 };
 
