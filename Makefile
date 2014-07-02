@@ -1,7 +1,10 @@
-all: clean libisotope_c examples_c libisotope_js examples_js
+all: clean c js
 
 clean:
 	rm -Rf build/
+
+c: libisotope_c examples_c
+js: libisotope_js examples_js
 
 libisotope_c: libisotope_c_file libisotope_c_rpi
 
