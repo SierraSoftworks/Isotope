@@ -11,6 +11,7 @@ http.createServer(function(req, res) {
 		'<html>'
 			'<head><title>Isotope Test</title></head>',
 			'<body>',
+				'<p>Enter some text, press Type and it will be typed in 5 seconds</p>',
 				'<form method="GET">',
 					'<textarea name="text" placeholder="Enter Text"/>',
 					'<button type="submit">Type</button>', 
@@ -19,7 +20,6 @@ http.createServer(function(req, res) {
 		'</html>'
 	].join("\n");
 
-	if(req.url.search) isotope.keyboard.write(req.url.query.text);
+	if(req.url.search) setTimeout(function() { isotope.keyboard.write(req.url.query.text); }, 5000);
 	return res.end(page);
-
 }).listen(3000);
