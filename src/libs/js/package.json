@@ -6,6 +6,7 @@
 	"licence": "MIT",
 	"private": true,
 	"repository": "https://git.sierrasoftworks.com/stellenbosch/isotope",
+	"main": "./isotope.js",
 	"dependencies": {
 		"serialport": "*"
 	}
