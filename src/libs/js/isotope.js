@@ -11,6 +11,7 @@ function Isotope(device) {
 	this.open = false;
 	this.buffer = [];
 	this.writeInterval = null;
+	this.bundleSize = 8;
 
 	if(typeof device == "string")
 		this.uart = new SerialPort(device, {
@@ -26,8 +27,7 @@ function Isotope(device) {
 		this.open = true;
 		if(!this.writeInterval) {
 			this.writeInterval = setInterval((function() {
-				if(this.buffer.length)
-					this.uart.write(this.buffer.shift());
+				this.flush(this.bundleSize);
 			}).bind(this), 1);
 			this.writeInterval.unref();
 		}
@@ -59,6 +59,20 @@ Isotope.mouse = require('./keycodes/mouse');
 
 Isotope.prototype.send = function(packet) {
 	this.buffer.push(packet);
+};
+
+Isotope.prototype.flush = function(max_bytes) {
+	var sent = 0;
+	while(this.buffer.length) {
+		var packet = this.buffer.shift();
+		sent += packet.length;
+		if(max_bytes && sent > max_bytes) {
+			this.buffer.unshift(packet);
+			return;
+		}
+
+		this.uart.write(packet);
+	}
 };
 
 Isotope.prototype.mouseRaw = function(buttons, deltaX, deltaY, deltaScroll) {
