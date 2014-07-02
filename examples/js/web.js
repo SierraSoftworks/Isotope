@@ -13,8 +13,8 @@ http.createServer(function(req, res) {
 			'<body>',
 				'<p>Enter some text, press Type and it will be typed in 5 seconds</p>',
 				'<form method="GET">',
-					'<textarea name="text" placeholder="Enter Text"/>',
-					'<button type="submit">Type</button>', 
+					'<textarea name="text" placeholder="Enter Text"></textarea>',
+					'<button type="submit">Type</button>',
 				'</form>',
 			'</body>',
 		'</html>'

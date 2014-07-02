@@ -13,3 +13,11 @@ Emulation is achieved through the use of the ATmega 32u4 processor which include
 Commands are sent from the master device (Raspberry Pi for example) to the emulation controller (Arduino Micro, Teensy etc.) over the UART connection by using a custom binary protocol developed for this exact purpose. This allows us to ensure reliable command execution, good performance and compatibility with a wide range of embedded devices including the Raspberry Pi, BeagleBone Black and even FPGAs.
 
 More information on the protocol used can be found in the docs/protocol folder.
+
+## Performance
+There are three limiting factors to performance of the emulator, namely the USB HID maximum polling rate of 1000Hz, the maximum transmission rate over the UART (dictacted by the packet size and configured baud rate) and finally the rate at which the ATmega32u4 is capable of handling requests.
+
+### Single Keypress (with/without modifier keys)
+We will consider this, as it is the most common usage scenario due to the limitations of the system (not being able to determine the actual cursor position on the display and so on). There are two aspects which should be investigated, the maximum communications rate, which is dictated by the packet size and baud rate, and the maximum processing rate.
+
+As the command consists of a 3 byte packet (header + modifiers + key), we can calculate the maximum transmission rate as (BAUD/8/PACKET_LENGTH) = 115200/8/3 = 480 packets/second.
