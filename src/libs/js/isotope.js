@@ -21,6 +21,7 @@ function Isotope(device) {
 	}).bind(this));
 
 	this.uart.on('data', (function(data) {
+		console.log("Got: %s", data.toString('hex'));
 		this.emit('data', data);
 	}).bind(this));
 
@@ -70,7 +71,7 @@ Isotope.prototype.mouseRaw = function(buttons, deltaX, deltaY, deltaScroll) {
 Isotope.prototype.keyboardRaw = function(modifiers, keys) {
 	var packet = zeros(8), length = 0;
 	packet[0] = 0x20;
-	if(!modifiers && (!keys || keys.length == 0)) return this.uart.write(packet);
+	if(!modifiers && (!keys || keys.length == 0)) return this.send(packet.slice(0, 1));
 
 	if(!Array.isArray(keys)) throw new Error("Keys should be an array");
 	if(keys.length > 6) throw new Error("A maximum of 6 keys can be pressed at any time.");
