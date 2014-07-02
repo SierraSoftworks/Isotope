@@ -45,7 +45,7 @@ Isotope.prototype.send = function(packet) {
 };
 
 Isotope.prototype.mouseRaw = function(buttons, deltaX, deltaY, deltaScroll) {
-	var packet = new Buffer(5), length = 4;
+	var packet = zeros(5), length = 4;
 	packet[0] = 0x40;
 	packet[1] = buttons;
 	packet[2] = deltaX;
@@ -68,7 +68,7 @@ Isotope.prototype.mouseRaw = function(buttons, deltaX, deltaY, deltaScroll) {
 };
 
 Isotope.prototype.keyboardRaw = function(modifiers, keys) {
-	var packet = new Buffer(8), length = 0;
+	var packet = zeros(8), length = 0;
 	packet[0] = 0x20;
 	if(!modifiers && (!keys || keys.length == 0)) return this.uart.write(packet);
 
@@ -81,3 +81,10 @@ Isotope.prototype.keyboardRaw = function(modifiers, keys) {
 
 	this.send(packet.slice(0, 2 + keys.length));
 };
+
+function zeros(n) {
+	var o = [];
+	for(var i = 0; i < n; i++)
+		o.push(0);
+	return o;
+}
