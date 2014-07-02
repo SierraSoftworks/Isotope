@@ -38,6 +38,12 @@ util.inherits(Isotope, EventEmitter);
 Isotope.keyboard = require('./keycodes/keyboard');
 Isotope.mouse = require('./keycodes/mouse');
 
+Isotope.prototype.send = function(packet) {
+	var hex = packet.map(function(x) { return x.toString(16); });
+	console.log('Sent: %s', hex);
+	this.uart.write(packet);
+};
+
 Isotope.prototype.mouseRaw = function(buttons, deltaX, deltaY, deltaScroll) {
 	var packet = new Buffer(5), length = 4;
 	packet[0] = 0x40;
@@ -58,7 +64,7 @@ Isotope.prototype.mouseRaw = function(buttons, deltaX, deltaY, deltaScroll) {
 	}
 
 	packet[0] |= length;
-	this.uart.write(packet.slice(0, length + 1));
+	this.send(packet.slice(0, length + 1));
 };
 
 Isotope.prototype.keyboardRaw = function(modifiers, keys) {
@@ -73,5 +79,5 @@ Isotope.prototype.keyboardRaw = function(modifiers, keys) {
 	for(var i = 0; i < keys.length; i++)
 		packet[i + 2] = keys[i];
 
-	this.uart.write(packet.slice(0, 2 + keys.length));
+	this.send(packet.slice(0, 2 + keys.length));
 };
