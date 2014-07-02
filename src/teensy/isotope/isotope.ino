@@ -1,4 +1,4 @@
-#define READ_TIMEOUT 5000
+#define READ_TIMEOUT 500
 
 #define OP_CUSTOM 0x00
 #define OP_KEYBOARD 0x1
