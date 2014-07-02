@@ -113,13 +113,38 @@ Keyboard.prototype.releaseModifiers = function(modifiers) {
 };
 
 Keyboard.prototype.write = function(text) {
-	var index, c;
+	var index, lastIndex, c, m;
 	for(var i = 0; i < text.length; i++) {
+		lastIndex = index;
+
+		// Handle the same character
+		if(c == text[i]) {
+			this.isotope.keyboardRaw();
+
+			// And disable handling of the shift-changed keys
+			lastIndex = -1;
+		}
+
 		c = text[i];
+
 		if(~(index = charMap.immutable.indexOf(c))) this.isotope.keyboardRaw(0, [codeMap.immutable[index]]);
-		else if(~(index = charMap.normal.indexOf(c))) this.isotope.keyboardRaw(0, [codeMap.mutable[index]]);
-		else if(~(index = charMap.shifted.indexOf(c))) this.isotope.keyboardRaw(keyCodes.modifiers.shift, [codeMap.mutable[index]]);
+		else {
+			m = 0;
+			if(~(index = charMap.normal.indexOf(c))) m = 0;
+			else if(~(index = charMap.shifted.indexOf(c))) m = keyCodes.modifiers.shift;
+			else {
+				console.warn("Unknown characer '%c'", c);
+				continue;
+			}
+
+			// Handle the same key (with shift changed)
+			if(index == lastIndex) this.isotope.keyboardRaw();
+
+			// Send the new key
+			this.isotope.keyboardRaw(m, [codeMap.mutable[index]]);
+		}
 	}
+
 	this.isotope.keyboardRaw();
 	return this;
 };
