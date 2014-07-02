@@ -13,28 +13,47 @@ function Mouse(isotope) {
 	this.updateTimeout = null;
 }
 
+Mouse.prototype = {
+	get then() {
+		if(this.updateTimeout) {
+			clearTimeout(this.updateTimeout);
+			this.updateTimeout = null;
+		}
+
+		this.isotope.mouseRaw(this.buttons | this.tempButtons, this.deltaX, this.deltaY, this.deltaScroll);
+		this.tempButtons = 0;
+		this.deltaX = 0;
+		this.deltaY = 0;
+		this.deltaScroll = 0;
+		this.updateTimeout = null;
+
+		return this;
+	},
+	get left() {
+		this.tempButtons |= mouse.left;
+		return this.queueUpdate();
+	},
+	get right() {
+		this.tempButtons |= mouse.right;
+		return this.queueUpdate();
+	},
+	get middle() {
+		this.tempButtons |= mouse.middle;
+		return this.queueUpdate();
+	}
+};
+
 Mouse.prototype.queueUpdate = function() {
 	if(!this.updateTimeout)
 		this.updateTimeout = setTimeout((function() {
 			this.updateTimeout = null;
 			this.now();
 		}).bind(this), 0);
+	return this;
 };
 
-Mouse.prototype.now = Mouse.prototype.then = function() {
-	if(this.updateTimeout) {
-		clearTimeout(this.updateTimeout);
-		this.updateTimeout = null;
-	}
-
-	this.isotope.mouseRaw(this.buttons | this.tempButtons, this.deltaX, this.deltaY, this.deltaScroll);
-	this.tempButtons = 0;
-	this.deltaX = 0;
-	this.deltaY = 0;
-	this.deltaScroll = 0;
-	this.updateTimeout = null;
-
-	return this;
+Mouse.prototype.now = function() {
+	return this.then;
 };
 
 Mouse.prototype.press = function(buttons) {
@@ -55,24 +74,6 @@ Mouse.prototype.release = function(buttons) {
 		this.buttons &= compliment;
 	}
 
-	this.queueUpdate();
-	return this;
-};
-
-Mouse.prototype.left = function() {
-	this.tempButtons |= mouse.left;
-	this.queueUpdate();
-	return this;
-};
-
-Mouse.prototype.right = function() {
-	this.tempButtons |= mouse.right;
-	this.queueUpdate();
-	return this;
-};
-
-Mouse.prototype.middle = function() {
-	this.tempButtons |= mouse.middle;
 	this.queueUpdate();
 	return this;
 };

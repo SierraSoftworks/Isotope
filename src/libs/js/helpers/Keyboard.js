@@ -26,12 +26,44 @@ function Keyboard(isotope) {
 	this.temporaryModifiers = 0;
 }
 
+Keyboard.prototype = {
+	get then() {
+		if(this.updateTimeout) {
+			clearTimeout(this.updateTimeout);
+			this.updateTimeout = null;
+		}
+
+		this.isotope.keyboardRaw(this.activeModifiers | this.temporaryModifiers, this.activeKeys);
+		this.temporaryModifiers = 0;
+		return this;
+	},
+	get ctrl() {
+		this.temporaryModifiers |= keyCodes.modifiers.ctrl;
+		return this.queueUpdate();
+	},
+	get alt() {
+		this.temporaryModifiers |= keyCodes.modifiers.alt;
+		return this.queueUpdate();
+	},
+	get shift() {
+		this.temporaryModifiers |= keyCodes.modifiers.shift;
+		return this.queueUpdate();
+	},
+	get releaseAll() {
+		this.activeKeys = [];
+		this.temporaryModifiers = 0;
+		this.activeModifiers = 0;
+		return this.queueUpdate();
+	}
+};
+
 Keyboard.prototype.queueUpdate = function() {
 	if(!this.updateTimeout)
 		this.updateTimeout = setTimeout((function() {
 			this.updateTimeout = null;
 			this.now();
 		}).bind(this), 0);
+	return this;
 };
 
 Keyboard.prototype.press = function(keys) {
@@ -80,29 +112,6 @@ Keyboard.prototype.releaseModifiers = function(modifiers) {
 	return this;
 };
 
-Keyboard.prototype.releaseAll = function() {
-	this.activeKeys = [];
-	this.temporaryModifiers = 0;
-	this.activeModifiers = 0;
-	this.queueUpdate();
-	return this;
-};
-
-Keyboard.prototype.ctrl = function() {
-	this.temporaryModifiers |= keyCodes.modifiers.ctrl;
-	return this;
-};
-
-Keyboard.prototype.alt = function() {
-	this.temporaryModifiers |= keyCodes.modifiers.alt;
-	return this;
-};
-
-Keyboard.prototype.shift = function() {
-	this.temporaryModifiers |= keyCodes.modifiers.shift;
-	return this;
-};
-
 Keyboard.prototype.write = function(text) {
 	var index, c;
 	for(var i = 0; i < text.length; i++) {
@@ -115,13 +124,6 @@ Keyboard.prototype.write = function(text) {
 	return this;
 };
 
-Keyboard.prototype.now = Keyboard.prototype.then = function() {
-	if(this.updateTimeout) {
-		clearTimeout(this.updateTimeout);
-		this.updateTimeout = null;
-	}
-
-	this.isotope.keyboardRaw(this.activeModifiers | this.temporaryModifiers, this.activeKeys);
-	this.temporaryModifiers = 0;
-	return this;
+Keyboard.prototype.now = function() {
+	return this.then;
 };

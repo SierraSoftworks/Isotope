@@ -2,7 +2,8 @@ var SerialPort = require('serialport').SerialPort,
 	EventEmitter = require('events').EventEmitter,
 	util = require('util');
 
-var Keyboard = require('./helpers/Keyboard');
+var Keyboard = require('./helpers/Keyboard'),
+	Mouse = require('./helpers/Mouse');
 
 module.exports = Isotope;
 
@@ -15,6 +16,7 @@ function Isotope(device) {
 	else this.uart = device;
 
 	this.keyboard = new Keyboard(this);
+	this.mouse = new Mouse(this);
 
 	this.uart.on('open', (function() {
 		this.emit('open');
@@ -40,8 +42,6 @@ Isotope.keyboard = require('./keycodes/keyboard');
 Isotope.mouse = require('./keycodes/mouse');
 
 Isotope.prototype.send = function(packet) {
-	var hex = packet.map(function(x) { return x.toString(16); });
-	console.log('Sent: %s', hex);
 	this.uart.write(packet);
 };
 
