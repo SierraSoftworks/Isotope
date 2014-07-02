@@ -84,6 +84,10 @@ Isotope.prototype.keyboardRaw = function(modifiers, keys) {
 	this.send(packet.slice(0, 2 + keys.length));
 };
 
+Isotope.prototype.close = function() {
+	this.uart.close();
+};
+
 function zeros(n) {
 	var o = [];
 	for(var i = 0; i < n; i++)
