@@ -11,7 +11,6 @@ function Isotope(device) {
 	this.open = false;
 	this.buffer = [];
 	this.writeInterval = null;
-	this.bundleSize = 8;
 
 	if(typeof device == "string")
 		this.uart = new SerialPort(device, {
@@ -26,9 +25,7 @@ function Isotope(device) {
 	this.uart.on('open', (function() {
 		this.open = true;
 		if(!this.writeInterval) {
-			this.writeInterval = setInterval((function() {
-				this.flush(this.bundleSize);
-			}).bind(this), 2);
+			this.writeInterval = setInterval(this.flush.bind(this), 1);
 			this.writeInterval.unref();
 		}
 		this.emit('open');
@@ -61,16 +58,9 @@ Isotope.prototype.send = function(packet) {
 	this.buffer.push(packet);
 };
 
-Isotope.prototype.flush = function(max_bytes) {
-	var sent = 0;
+Isotope.prototype.flush = function() {
 	while(this.buffer.length) {
 		var packet = this.buffer.shift();
-		sent += packet.length;
-		if(max_bytes && sent > max_bytes) {
-			this.buffer.unshift(packet);
-			return;
-		}
-
 		this.uart.write(packet);
 	}
 };
