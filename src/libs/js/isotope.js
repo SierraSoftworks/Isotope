@@ -15,7 +15,7 @@ function Isotope(device) {
 
 	if(typeof device == "string")
 		this.uart = new SerialPort(device, {
-			baudrate: 115200,
+			baudrate: 38400,
 			parity: 'even'
 		});
 	else this.uart = device;

@@ -49,7 +49,7 @@ int isotope_open(const char* device) {
 	struct termios options;
 
 	tcgetattr(uart, &options);
-	options.c_cflag = B115200 | CS8 | CLOCAL;		//<Set baud rate
+	options.c_cflag = B38400 | CS8 | CLOCAL;		//<Set baud rate
 	options.c_iflag = PARENB;
 	options.c_oflag = 0;
 	options.c_lflag = 0;
