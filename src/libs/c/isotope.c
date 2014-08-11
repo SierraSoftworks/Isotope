@@ -1,3 +1,12 @@
+/**
+ * Isotope C Library
+ * Provides a C interface between the Isotope emulation chip
+ * and the local system, as well as a number of useful command
+ * wrappers.
+ *
+ * Copyright © Benjamin Pannell 2014
+ */
+
 #ifndef ISOTOPE_C
 #define ISOTOPE_C
 

@@ -4,7 +4,7 @@
  * and the local system, as well as a number of useful command
  * wrappers.
  *
- * Copyright Benjamin Pannell 2014
+ * Copyright © Benjamin Pannell 2014
  */
 
 #ifndef ISOTOPE_H
