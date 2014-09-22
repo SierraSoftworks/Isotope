@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>Isotope/PocketSphinx</title>
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	</head>
+
+	<body>
+		<div id="output">Waiting...</div>
+
+		<script type="text/javascript">
+			navigator.getUserMedia = navigator.getUserMedia ||navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+			if(navigator.getUserMedia)
+				navigator.getUserMedia({ audio: true }, function(stream) {
+					var audioContext = window.AudioContext || window.webkitAudioContext;
+					var context = new audioContext();
+					var audioInput = context.createMediaStreamSource(stream);
+
+					var socket = io.connect(window.location.origin);
+
+					socket.on('utterance', function(data) {
+						document.getElementById('output').innerHtml = data.phrase;
+					});
+
+					var buffer = context.createBuffer(1, 2048, 16000);
+					var streamer = (context.createScriptProcessor || context.createJavaScriptNode).call(context, 2048, 1, 1);
+					streamer.onaudioprocess = function(e) {
+						var data = e.inputBuffer.getChannelData(0);
+						socket.emit('audio', data.buffer);
+					};
+
+					audioInput.connect(streamer);
+					streamer.connect(context.destination);
+				}, function(err) {
+					document.getElementById('output').innerHtml = "<b>Setup Failed</b> We were unable to start listening to audio input.";
+				});
+			else
+				document.getElementById('output').innerHtml = "<b>Setup Failed</b> Your web browser does not support the HTML5 getUserMedia API";
+		</script>
+	</body>
+</html>
