@@ -5,7 +5,7 @@
 	"private": "true",
 	"dependencies": {
 		"libisotope": "*",
-		"pocketsphinx": "*",
+		"pocketsphinx": "moneppo/node-pocketsphinx",
 		"express": "4.x",
 		"socket.io": "1.x"
 	}
