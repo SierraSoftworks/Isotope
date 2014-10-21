@@ -1,3 +1,12 @@
+/**
+ * Isotope C Library
+ * Provides a C interface between the Isotope emulation chip
+ * and the local system, as well as a number of useful command
+ * wrappers.
+ *
+ * Copyright © Benjamin Pannell 2014
+ */
+
 #ifndef ISOTOPE_C
 #define ISOTOPE_C
 
@@ -49,7 +58,7 @@ int isotope_open(const char* device) {
 	struct termios options;
 
 	tcgetattr(uart, &options);
-	options.c_cflag = B115200 | CS8 | CLOCAL;		//<Set baud rate
+	options.c_cflag = B38400 | CS8 | CLOCAL;		//<Set baud rate
 	options.c_iflag = PARENB;
 	options.c_oflag = 0;
 	options.c_lflag = 0;

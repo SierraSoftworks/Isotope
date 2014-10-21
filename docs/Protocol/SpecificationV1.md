@@ -16,7 +16,7 @@ Version 1.0 of this protocol will adopt the second approach, attempting to imple
 ## Protocol
 
 ### Packet
-All protocol operations are wrapped in a packet structure similar to the following. Packets consist of a 3-bit **OP_CODE** field, a 5-bit **ARG_COUNT** field as well as a number of 8-bit arguments. There is a protocol imposed limit of 15 arguments, limiting the total packet size to 16-bytes.
+All protocol operations are wrapped in a packet structure similar to the following. Packets consist of a 3-bit **OP_CODE** field, a 5-bit **ARG_COUNT** field as well as a number of 8-bit arguments. There is a protocol imposed limit of 31 arguments, limiting the total packet size to 32-bytes.
 
 ---------------------------
 |   OP_CODE   | ARG_COUNT |

@@ -1,3 +1,12 @@
+/**
+ * Isotope Node.js Library
+ * Provides a Node.js interface between the Isotope emulation chip
+ * and the local system, as well as a number of useful command
+ * wrappers.
+ *
+ * Copyright © Benjamin Pannell 2014
+ */
+
 var mouse = require('../keycodes/mouse');
 
 module.exports = Mouse;

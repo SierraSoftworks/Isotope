@@ -1,0 +1,12 @@
+{
+	"name": "isotope_voices",
+	"version": "1.0.0",
+	"description": "A set of examples for how to use Isotope in Node.js with PocketSphinx",
+	"private": "true",
+	"dependencies": {
+		"libisotope": "*",
+		"pocketsphinx": "SPARTAN563/node-pocketsphinx",
+		"express": "4.x",
+		"socket.io": "1.x"
+	}
+}
