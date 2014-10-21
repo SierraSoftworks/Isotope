@@ -189,7 +189,7 @@ char parseKey(char* keys, int* keysCount, int* parseLocation) {
     
     key = cmd_getNextValue(parseLocation);
     if(!key) return 0;
-    strupr(key);
+    cmd_strupr(key);
     
     for(i = 0; i < sizeof(keymap)/sizeof(KEYBIND); i++) {
         if(!strcmp(key, keymap[i].shortcut)) {

@@ -17,7 +17,7 @@ extern "C" {
     int cmd_length();
     char cmd_hasFlag(const char shortFlag, const char* longFlag);
     char* cmd_getNextValue(int* position);
-    
+    char* cmd_strupr(char* str);
 
 #ifdef	__cplusplus
 }
