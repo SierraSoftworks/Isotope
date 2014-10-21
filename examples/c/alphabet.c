@@ -35,6 +35,9 @@ int main() {
 		}
 	}
 
+	sleep(1000);
+	isotope_keyboard(isotope, 0, keys, 0);
+
 	isotope_close(isotope);
 
 	return 0;
