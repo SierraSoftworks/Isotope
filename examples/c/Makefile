@@ -6,7 +6,7 @@ OUTPUT_DIR=../../build/examples/c/
 LIBS_DIR=../../build/libs/c/
 SOURCES=isotope.c
 
-all: clean file rpi
+all: file rpi
 
 rpi: TARGET = rpi
 rpi: CFLAGS += -DRPI

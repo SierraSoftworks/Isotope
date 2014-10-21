@@ -29,9 +29,9 @@ char cmd_hasFlag(char shortFlag, char* longFlag) {
     return 0;
 }
 
-char* cmd_getNextValue(int* position) {
+const char* cmd_getNextValue(int* position) {
     for(; *position < cmd_argc; *position++) {
-        if(cmd_argv[*position][0] != "-") return cmd_argv[*position];
+        if(cmd_argv[*position][0] != '-') return cmd_argv[*position];
     }
     *position = 0;
     return 0;
