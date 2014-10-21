@@ -203,7 +203,7 @@ KEYBIND keymap[] = {
     { "NUM-", KEYPAD_MINUS },
     { "NUMMINUS", KEYPAD_MINUS },
     { "NUM.", KEYPAD_PERIOD },
-    { "NUMPERIOD", KEYPAD_PERIOD },
+    { "NUMPERIOD", KEYPAD_PERIOD }
 };
 
 char parseKey(char* keys, int* keysCount) {
