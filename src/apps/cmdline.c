@@ -17,7 +17,7 @@ int cmd_length() {
     return cmd_argc - 1;
 }
 
-char cmd_hasFlag(const char shortFlag, const char* longFlag) {
+char cmd_hasFlag(char shortFlag, char* longFlag) {
     int i;
     shortFlag = toupper(shortFlag);
     cmd_strupr(longFlag);

@@ -15,7 +15,7 @@ extern "C" {
     void cmd_init(int argc, const char** argv);
     const char* cmd_application();
     int cmd_length();
-    char cmd_hasFlag(const char shortFlag, const char* longFlag);
+    char cmd_hasFlag(char shortFlag, char* longFlag);
     char* cmd_getNextValue(int* position);
     char* cmd_strupr(char* str);
 
