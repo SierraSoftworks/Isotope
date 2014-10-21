@@ -71,9 +71,11 @@ int main(int argc, const char** argv) {
     while(parseKey(keys, &keysCount, &parseLocation));
     
     if(isotope = isotope_open("/dev/ttyAMA0")) {
+        printf("Pressing %d keys\n", keysCount);
         isotope_keyboard(isotope, modifiers, keys, keysCount);
         if(release) isotope_keyboard(isotope, 0, 0, 0);
         isotope_close(isotope);
+        return 0;
     } else {
         printf("Error: Unable to connect to Isotope device, please ensure the UART is available.\n");
         return -2;
@@ -192,13 +194,11 @@ char parseKey(char* keys, int* keysCount, int* parseLocation) {
     key = cmd_getNextValue(parseLocation);
     if(!key) return 0;
     keyUpper = cmd_strupr(key);
-
-    printf("DEBUG: Searching %d keymaps for %s\n", sizeof(keymap)/sizeof(KEYBIND), keyUpper);
     
     for(i = 0; i < sizeof(keymap)/sizeof(KEYBIND); i++) {
         if(!strcmp(keyUpper, keymap[i].shortcut)) {
             keys[*keysCount++] = keymap[i].code;
-            return 1;
+            return *parseLocation < cmd_length() - 1;
         }
     }
     
