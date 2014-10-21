@@ -5,7 +5,7 @@ if [ $# -ne 2 ]; then
 	exit 1
 fi
 
-if (( $EUID )); then
+if (( $EUID -ne 0 )); then
    echo "You must be root to run this script. Try running sudo $0 or sudo !!" 1>&2
    exit 1
 fi
