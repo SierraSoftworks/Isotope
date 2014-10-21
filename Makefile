@@ -3,7 +3,7 @@ all: clean c js
 clean:
 	rm -Rf build/
 
-c: libisotope_c examples_c apps
+c: libisotope_c examples_c apps_c
 js: libisotope_js examples_js
 
 libisotope_c: libisotope_c_file libisotope_c_rpi
@@ -29,7 +29,7 @@ examples_js:
 	@mkdir -p examples/js/node_modules/libisotope
 	@cp -R src/libs/js/* examples/js/node_modules/libisotope 
 
-apps:
+apps_c:
 	@echo "Building Command Line Applications"
 	@cd src/apps/; make all;
 
