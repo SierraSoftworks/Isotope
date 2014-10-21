@@ -14,14 +14,18 @@ int main(int argc, const char** argv) {
     
     printf("Application: %s\n", cmd_application());
     
+    printf("\nArguments:\n");
+    while(arg = cmd_nextArgument())
+        printf("  %s\n", arg);
+    
     printf("\nFlags:\n");
     while(arg = cmd_nextFlag()) {
-        printf("%s\n", arg);
+        printf("  %s\n", arg);
     }
     
-    printf("\nArguments:\n");
+    printf("\nValues:\n");
     while(arg = cmd_nextValue()) {
-        printf("%s\n", arg);
+        printf("  %s\n", arg);
     }
     return 0;
 }
