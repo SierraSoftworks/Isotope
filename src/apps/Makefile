@@ -9,15 +9,15 @@ all: test file rpi
 
 rpi: TARGET = rpi
 rpi: CFLAGS += -DRPI
-rpi: isokey isomouse
+rpi: isokey isomouse isowrite
 
 file: TARGET = file
-file: isokey isomouse
+file: isokey isomouse isowrite
 
 prebuild:
 	@mkdir -p $(OUTPUT_DIR)$(TARGET)
 
-isokey isomouse: prebuild
+isokey isomouse isowrite: prebuild
 	@echo " - Building $@ Example"
 	@$(CC) -o $(OUTPUT_DIR)$(TARGET)/$@ $(LIBS_DIR)$(TARGET)/isotope.o cmdline.c $@.c 
 

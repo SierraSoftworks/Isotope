@@ -18,6 +18,7 @@ extern "C" {
     char cmd_hasFlag(char shortFlag, const char* longFlag);
     const char* cmd_nextValue();
     const char* cmd_nextFlag();
+    const char* cmd_nextArgument();
     char* cmd_strupr(const char* str);
 
 #ifdef	__cplusplus

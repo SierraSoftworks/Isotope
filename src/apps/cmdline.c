@@ -4,6 +4,7 @@
 
 const char** cmd_argv;
 int cmd_argc;
+int cmd_parsePosition = 1;
 int cmd_parsePosition_value = 1;
 int cmd_parsePosition_flag = 1;
 
@@ -48,6 +49,11 @@ char cmd_hasFlag(char shortFlag, const char* longFlag) {
     }
     free(upLongFlag);
     return 0;
+}
+
+const char* cmd_nextArgument() {
+    if(cmd_parsePosition >= cmd_argc) return 0;
+    return cmd_argv[cmd_parsePosition++];
 }
 
 const char* cmd_nextValue() {

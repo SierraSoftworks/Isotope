@@ -81,7 +81,7 @@ int main(int argc, const char** argv) {
 }
 
 typedef struct KEYBIND {
-    char shortcut[10];
+    char shortcut[15];
     int code;
 } KEYBIND;
 
@@ -181,7 +181,29 @@ KEYBIND keymap[] = {
     { "MENU", KEY_MENU },
     { "TAB", KEY_TAB },
     { "PGUP", KEY_PAGE_UP },
-    { "PGDN", KEY_PAGE_DOWN }
+    { "PGDN", KEY_PAGE_DOWN },
+    
+    { "NUM0", KEYPAD_0 },
+    { "NUM1", KEYPAD_1 },
+    { "NUM2", KEYPAD_2 },
+    { "NUM3", KEYPAD_3 },
+    { "NUM4", KEYPAD_4 },
+    { "NUM5", KEYPAD_5 },
+    { "NUM6", KEYPAD_6 },
+    { "NUM7", KEYPAD_7 },
+    { "NUM8", KEYPAD_8 },
+    { "NUM9", KEYPAD_9 },
+    { "NUMENTER", KEYPAD_ENTER },
+    { "NUM/", KEYPAD_SLASH },
+    { "NUMSLASH", KEYPAD_SLASH },
+    { "NUM*", KEYPAD_ASTERIX },
+    { "NUMASTERIX", KEYPAD_ASTERIX },
+    { "NUM+", KEYPAD_PLUS },
+    { "NUMPLUS", KEYPAD_PLUS },
+    { "NUM-", KEYPAD_MINUS },
+    { "NUMMINUS", KEYPAD_MINUS },
+    { "NUM.", KEYPAD_PERIOD },
+    { "NUMPERIOD", KEYPAD_PERIOD },
 };
 
 char parseKey(char* keys, int* keysCount) {
