@@ -196,7 +196,7 @@ char parseKey(char* keys, int* keysCount) {
     
     for(i = 0; i < sizeof(keymap)/sizeof(KEYBIND); i++) {
         if(!strcmp(keyUpper, keymap[i].shortcut)) {
-            keys[*keysCount++] = keymap[i].code;
+            keys[(*keysCount)++] = keymap[i].code;
             return 1;
         }
     }
