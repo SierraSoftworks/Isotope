@@ -15,8 +15,9 @@ extern "C" {
     void cmd_init(int argc, const char** argv);
     const char* cmd_application();
     int cmd_length();
-    char cmd_hasFlag(char shortFlag, char* longFlag);
-    const char* cmd_getNextValue(int* position);
+    char cmd_hasFlag(char shortFlag, const char* longFlag);
+    const char* cmd_nextValue();
+    const char* cmd_nextFlag();
     char* cmd_strupr(const char* str);
 
 #ifdef	__cplusplus

@@ -32,14 +32,13 @@
 #include <string.h>
 #include <stdlib.h>
 
-char parseKey(char* keys, int* keysCount, int* parseLocation);
+char parseKey(char* keys, int* keysCount);
 
 int main(int argc, const char** argv) {
     int isotope;
     char modifiers = 0;
     char keys[6] = {0};
     int keysCount = 0;
-    int parseLocation = 1;
     char release = 1;
     
     cmd_init(argc, argv);
@@ -68,7 +67,7 @@ int main(int argc, const char** argv) {
     if(cmd_hasFlag(0, "lwin")) modifiers |= MODIFIERKEY_LEFT_GUI;
     if(cmd_hasFlag(0, "rwin")) modifiers |= MODIFIERKEY_RIGHT_GUI;
     
-    while(parseKey(keys, &keysCount, &parseLocation));
+    while(parseKey(keys, &keysCount));
     
     if(isotope = isotope_open("/dev/ttyAMA0")) {
         printf("Pressing %d keys\n", keysCount);
@@ -186,22 +185,22 @@ KEYBIND keymap[] = {
     { "PGDN", KEY_PAGE_DOWN }
 };
 
-char parseKey(char* keys, int* keysCount, int* parseLocation) {
+char parseKey(char* keys, int* keysCount) {
     const char* key;
     char* keyUpper;
     int i;
     
-    key = cmd_getNextValue(parseLocation);
+    key = cmd_nextValue();
     if(!key) return 0;
     keyUpper = cmd_strupr(key);
     
     for(i = 0; i < sizeof(keymap)/sizeof(KEYBIND); i++) {
         if(!strcmp(keyUpper, keymap[i].shortcut)) {
             keys[*keysCount++] = keymap[i].code;
-            return *parseLocation < cmd_length() - 1;
+            return 1;
         }
     }
     
     printf("WARN: Failed to find a binding for key '%s'\n", keyUpper);
-    return *parseLocation < cmd_length() - 1;
+    return 1;
 }

@@ -1,12 +1,13 @@
-all: clean c js
+all: clean c test
 
 clean:
 	rm -Rf build/
 
 c: libisotope_c examples_c apps_c
 js: libisotope_js examples_js
+test: apps_c_test
 
-rpi: libisotope_c_rpi examples_c_rpi apps_c_rpi libisotope_js examples_js
+rpi: libisotope_c_rpi examples_c_rpi apps_c_rpi
 
 libisotope_c: libisotope_c_file libisotope_c_rpi
 
@@ -42,6 +43,9 @@ apps_c_file:
 apps_c_rpi:
 	@echo "Building Command Line Applications for UART"
 	@cd src/apps/; make rpi
+apps_c_test:
+	@echo "Building Command Line Applications for Testing"
+	@cd src/apps/; make test
 
 publish:
 	@echo "Publishing libraries"

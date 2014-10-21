@@ -22,7 +22,6 @@ int main(int argc, const char** argv) {
     int isotope;
     char buttons = 0;
     char x = 0, y = 0, scroll = 0;
-    int parseLocation = 1;
     const char* value;
     int val;
     char release = 1;
@@ -41,7 +40,7 @@ int main(int argc, const char** argv) {
     if(cmd_hasFlag('M', "middle")) buttons |= 0x4;
     if(cmd_hasFlag('H', "hold")) release = 0;
     
-    while(value = cmd_getNextValue(&parseLocation)) {
+    while(value = cmd_nextValue()) {
         sscanf(value + 1, "%d", &val);
         
         if(val > 127 || val < -127) {

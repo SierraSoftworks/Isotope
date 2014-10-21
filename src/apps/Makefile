@@ -5,7 +5,7 @@ TARGET=
 OUTPUT_DIR=../../build/apps/
 LIBS_DIR=../../build/libs/c/
 
-all: file rpi
+all: test file rpi
 
 rpi: TARGET = rpi
 rpi: CFLAGS += -DRPI
@@ -20,6 +20,10 @@ prebuild:
 isokey isomouse: prebuild
 	@echo " - Building $@ Example"
 	@$(CC) -o $(OUTPUT_DIR)$(TARGET)/$@ $(LIBS_DIR)$(TARGET)/isotope.o cmdline.c $@.c 
+
+test: prebuild
+	@echo " - Building cmdline test"
+	@$(CC) -o $(OUTPUT_DIR)cmdline_test cmdline.c cmdline_test.c
 
 clean:
 	@rm -Rf $(OUTPUT_DIR)
