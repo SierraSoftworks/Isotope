@@ -75,8 +75,12 @@ void writeChar(int isotope, const char character) {
         modifiers = MODIFIERKEY_SHIFT;
         keys[0] = map_mutable[index - keys];
     }
-    else printf("WARN: Couldn't find a key handler for '%c'\n", character);
+    else {
+        printf("WARN: Couldn't find a key handler for '%c'\n", character);
+        return;
+    }
     
+    printf('%c', character);
     isotope_keyboard(isotope, modifiers, keys, 1);
     isotope_keyboard(isotope, 0, keys, 0);
 }
