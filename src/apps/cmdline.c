@@ -50,12 +50,12 @@ const char* cmd_getNextValue(int* position) {
 
 char* cmd_strupr(const char* str) {
     int strLength;
-    char* s;
+    char* s, *target;
     strLength = strlen(str) + 1;
-    s = (char*)malloc(strLength * sizeof(char));
-    do {
-        *(s++) = toupper(*str);
-    } while(*(++str));
+    target = s = (char*)malloc(strLength * sizeof(char));
+    while(*str) {
+        *(s++) = toupper(*str++);
+    }
     *s = 0;
-    return s;
+    return target;
 }

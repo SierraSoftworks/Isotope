@@ -192,6 +192,8 @@ char parseKey(char* keys, int* keysCount, int* parseLocation) {
     key = cmd_getNextValue(parseLocation);
     if(!key) return 0;
     keyUpper = cmd_strupr(key);
+
+    printf("DEBUG: Searching %d keymaps for %s\n", sizeof(keymap)/sizeof(KEYBIND), keyUpper);
     
     for(i = 0; i < sizeof(keymap)/sizeof(KEYBIND); i++) {
         if(!strcmp(keyUpper, keymap[i].shortcut)) {
@@ -199,9 +201,7 @@ char parseKey(char* keys, int* keysCount, int* parseLocation) {
             return 1;
         }
     }
-
-    free(keyUpper);
     
-    printf("WARN: Failed to find a binding for key '%s'\n", key);
-    return 1;
+    printf("WARN: Failed to find a binding for key '%s'\n", keyUpper);
+    return *parseLocation < cmd_length() - 1;
 }
