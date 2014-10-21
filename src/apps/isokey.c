@@ -186,7 +186,7 @@ KEYBIND keymap[] = {
 
 char parseKey(char* keys, int* keysCount, int* parseLocation) {
     const char* key;
-    const char* keyUpper;
+    char* keyUpper;
     int i;
     
     key = cmd_getNextValue(parseLocation);
@@ -200,7 +200,7 @@ char parseKey(char* keys, int* keysCount, int* parseLocation) {
         }
     }
 
-    free((void*)keyUpper);
+    free(keyUpper);
     
     printf("WARN: Failed to find a binding for key '%s'\n", key);
     return 1;

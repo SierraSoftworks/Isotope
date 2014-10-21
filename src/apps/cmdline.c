@@ -48,7 +48,7 @@ const char* cmd_getNextValue(int* position) {
     return 0;
 }
 
-const char* cmd_strupr(const char* str) {
+char* cmd_strupr(const char* str) {
     int strLength;
     char* s;
     strLength = strlen(str) + 1;
