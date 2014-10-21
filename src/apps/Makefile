@@ -19,7 +19,7 @@ prebuild:
 
 isokey isomouse: prebuild
 	@echo " - Building $@ Example"
-	@$(CC) -o $(OUTPUT_DIR)$(TARGET)/$@ $(LIBS_DIR)$(TARGET)/isotope.o $@.c 
+	@$(CC) -o $(OUTPUT_DIR)$(TARGET)/$@ -o $(OUTPUT_DIR)$(TARGET)/cmdline.o $(LIBS_DIR)$(TARGET)/isotope.o cmdline.c $@.c 
 
 clean:
 	@rm -Rf $(OUTPUT_DIR)
