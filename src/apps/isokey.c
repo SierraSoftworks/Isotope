@@ -70,7 +70,6 @@ int main(int argc, const char** argv) {
     while(parseKey(keys, &keysCount));
     
     if(isotope = isotope_open("/dev/ttyAMA0")) {
-        printf("Pressing %d keys\n", keysCount);
         isotope_keyboard(isotope, modifiers, keys, keysCount);
         if(release) isotope_keyboard(isotope, 0, 0, 0);
         isotope_close(isotope);
