@@ -23,7 +23,7 @@ int main(int argc, const char** argv) {
     char buttons = 0;
     char x = 0, y = 0, scroll = 0;
     int parseLocation = 1;
-    char* value;
+    const char* value;
     int val;
     char release = 1;
     

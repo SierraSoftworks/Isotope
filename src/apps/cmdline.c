@@ -33,7 +33,7 @@ const char* cmd_getNextValue(int* position) {
     for(; *position < cmd_argc; *position++) {
         if(cmd_argv[*position][0] != '-') return cmd_argv[*position];
     }
-    *position = 0;
+    *position = 1;
     return 0;
 }
 
