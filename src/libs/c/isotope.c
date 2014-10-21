@@ -6,12 +6,13 @@
  *
  * Copyright © Benjamin Pannell 2014
  */
-
 #ifndef ISOTOPE_C
 #define ISOTOPE_C
 
 #include "isotope.h"
+#include "keylayouts.h"
 #include <stdio.h>
+#include <string.h>
 
 #ifdef RPI
 #define ISOTOPE_IO
@@ -45,7 +46,7 @@ int isotope_open(const char* device) {
 	#endif
 
 	#ifdef ISOTOPE_IO // Standard IO operations
-	uart = open(device, O_WRONLY | O_NOCTTY | O_NDELAY);
+	uart = open(device, O_RDWR | O_NOCTTY | O_NDELAY);
 	if(-1 == uart) return 0;
 	#endif
 
@@ -85,6 +86,15 @@ char isotope_write(int isotope, const char* packet, char packet_length) {
 	#ifdef ISOTOPE_IO
 	return write(isotope, packet, packet_length);
 	#endif
+}
+
+int isotope_read(int isotope, char* buffer, int length) {
+        #ifdef ISOTOPE_FIO
+        return fread(buffer, sizeof(char), length, (FILE*)isotope);
+        #endif
+        #ifdef ISOTOPE_IO
+        return read(isotope, buffer, length);
+        #endif
 }
 
 char isotope_mouse(int isotope, char buttons, char deltaX, char deltaY, char deltaScroll) {
@@ -141,6 +151,46 @@ char isotope_joystick(int isotope, int buttons, short x, short y, short z, short
 	packet[13] = hat;
 
 	return isotope_write(isotope, packet, 14);
+}
+
+
+const char* _isotope_immutable = "\n\t ";
+const char* _isotope_mutable_normal = "abcdefghijklmnopqrstuvwxyz1234567890-=[]\\;'`,./";
+const char* _isotope_mutable_shifted = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:\"~<>?";
+const char _isotope_map_immutable[] = {40, 43, 44};
+const char _isotope_map_mutable[] = {
+    4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,
+    30,31,32,33,34,35,36,37,38,39,
+    45,46,47,48,49,51,52,53,54,55,56
+};
+
+int isotope_text(int isotope, const char* text) {
+    int written = 0;
+    char current, *index;
+    char lastKey = 0, key = 0;
+    char lastModifiers = 0, modifiers = 0;
+    
+    while(current = *text++) {
+        modifiers = 0;
+        key = 0;
+        if(index = strchr(_isotope_immutable, current))
+            key = _isotope_map_immutable[index - _isotope_immutable];
+        else if(index = strchr(_isotope_mutable_normal, current))
+            key = _isotope_map_mutable[index - _isotope_mutable_normal];
+        else if(index = strchr(_isotope_mutable_shifted, current)) {
+            key = _isotope_map_mutable[index - _isotope_mutable_shifted];
+            modifiers = MODIFIERKEY_SHIFT;
+        } else continue;
+        
+        if(lastModifiers == modifiers && lastKey == key)
+            written += isotope_keyboard(isotope, 0, 0, 0);
+        lastModifiers = modifiers;
+        lastKey = key;
+        
+        written += isotope_keyboard(isotope, modifiers, &key, 1);
+    }
+    written += isotope_keyboard(isotope, 0, 0, 0);
+    return written;
 }
 
 #endif

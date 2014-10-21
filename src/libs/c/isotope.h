@@ -43,6 +43,14 @@ char isotope_mouse(int isotope, char buttons, char deltaX, char deltaY, char del
 char isotope_keyboard(int isotope, char modifiers, const char keys[], char keys_count);
 
 /**
+ * Converts the given text into a series of keyboard emulation requests for transmission
+ * to a remote Isotope.
+ * @param isotope The opened Isotope connection to send the emulation requests over.
+ * @param text The null terminated string to send to the remote machine.
+ */
+int isotope_text(int isotope, const char* text);
+
+/**
  * Sends a joystick emulation request using the given Isotope.
  * @param isotope The opened Isotope connection to send the emulation request over.
  * @param buttons The 32 button's depression states to emulate 0x1, 0x2 etc.
@@ -63,5 +71,14 @@ char isotope_joystick(int isotope, int buttons, short x, short y, short z, short
  * @param length The number of bytes in the packet
  */
 char isotope_write(int isotope, const char* packet, char length);
+
+/**
+ * Reads a number of bytes from the remote device into the given buffer
+ * @param isotope The Isotope connection over which to retrieve data
+ * @param packet The buffer into which data will be read
+ * @param length The number of bytes available within the buffer for writing
+ * @returns The number of bytes read into the buffer
+ */
+int isotope_read(int isotope, char* buffer, int length);
 
 #endif
