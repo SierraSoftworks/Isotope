@@ -1,12 +1,23 @@
 #include "cmdline.h"
 #include <string.h>
+#include <stdlib.h>
 
 const char** cmd_argv;
 int cmd_argc;
 
 void cmd_init(int argc, const char** argv) {
-    cmd_argv = argv;
+    int i, len;
+
+    cmd_argv = (const char**)malloc(argc * sizeof(char*));
     cmd_argc = argc;
+
+    for(i = 0; i < argc; i++) {
+        if(argv[i][0] == '-') {
+            cmd_argv[i] = cmd_strupr(argv[i]);
+        } else {
+            cmd_argv[i] = argv[i];
+        }
+    }
 }
 
 const char* cmd_application() {
@@ -23,8 +34,8 @@ char cmd_hasFlag(char shortFlag, char* longFlag) {
     cmd_strupr(longFlag);
 
     for(i = 1; i < cmd_argc; i++) {
-        if(shortFlag && cmd_argv[i][0] == '-' && toupper(cmd_argv[i][1]) == shortFlag && cmd_argv[i][2] == '\0') return 1;
-        if(longFlag && !strncmp(cmd_argv[i], "--", 2) && !strcmp(cmd_strupr(cmd_argv[i] + 2), longFlag)) return 1;
+        if(shortFlag && cmd_argv[i][0] == '-' && cmd_argv[i][1] == shortFlag && cmd_argv[i][2] == '\0') return 1;
+        if(longFlag && !strncmp(cmd_argv[i], "--", 2) && !strcmp(cmd_argv[i] + 2, longFlag)) return 1;
     }
     return 0;
 }
@@ -37,10 +48,14 @@ const char* cmd_getNextValue(int* position) {
     return 0;
 }
 
-char* cmd_strupr(char* str) {
-    char* s = str;
+const char* cmd_strupr(const char* str) {
+    int strLength;
+    char* s;
+    strLength = strlen(str) + 1;
+    s = (char*)malloc(strLength * sizeof(char));
     do {
-        *s = toupper(*s);
-    } while(*(++s));
-    return str;
+        *(s++) = toupper(*str);
+    } while(*(++str));
+    *s = 0;
+    return s;
 }

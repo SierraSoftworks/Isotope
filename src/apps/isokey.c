@@ -30,6 +30,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 char parseKey(char* keys, int* keysCount, int* parseLocation);
 
@@ -184,19 +185,22 @@ KEYBIND keymap[] = {
 };
 
 char parseKey(char* keys, int* keysCount, int* parseLocation) {
-    char* key;
+    const char* key;
+    const char* keyUpper;
     int i;
     
     key = cmd_getNextValue(parseLocation);
     if(!key) return 0;
-    cmd_strupr(key);
+    keyUpper = cmd_strupr(key);
     
     for(i = 0; i < sizeof(keymap)/sizeof(KEYBIND); i++) {
-        if(!strcmp(key, keymap[i].shortcut)) {
+        if(!strcmp(keyUpper, keymap[i].shortcut)) {
             keys[*keysCount++] = keymap[i].code;
             return 1;
         }
     }
+
+    free((void*)keyUpper);
     
     printf("WARN: Failed to find a binding for key '%s'\n", key);
     return 1;
