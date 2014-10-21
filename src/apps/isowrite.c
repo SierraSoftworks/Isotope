@@ -80,7 +80,7 @@ void writeChar(int isotope, const char character) {
         return;
     }
     
-    printf('%c', character);
+    printf("%c", character);
     isotope_keyboard(isotope, modifiers, keys, 1);
     isotope_keyboard(isotope, 0, keys, 0);
 }
