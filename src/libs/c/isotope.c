@@ -35,7 +35,7 @@ int _isotope_pack(short axis1, short axis2, short axis3) {
 }
 
 clock_t _isotope_lastwrite = 0;
-int isotope_maxRate = 1000;
+int isotope_maxRate = 125;
 void _isotope_ratelimit() {
     clock_t now;
     
