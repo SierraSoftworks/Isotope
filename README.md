@@ -20,4 +20,4 @@ There are three limiting factors to performance of the emulator, namely the USB 
 ### Single Keypress (with/without modifier keys)
 We will consider this, as it is the most common usage scenario due to the limitations of the system (not being able to determine the actual cursor position on the display and so on). There are two aspects which should be investigated, the maximum communications rate, which is dictated by the packet size and baud rate, and the maximum processing rate.
 
-As the command consists of a 3 byte packet (header + modifiers + key), we can calculate the maximum transmission rate as (BAUD/8/PACKET_LENGTH) = 115200/8/3 = 480 packets/second.
+As the command consists of a 3 byte packet (header + modifiers + key), we can calculate the maximum transmission rate as (BAUD/11/PACKET_LENGTH) = 115200/11/3 = 3500 packets/second. Specifically, we can determine the optimum transmission rate to ensure we do not exceed the 1000Hz limit by rearranging the equation - leaving us with 38400 baud as our best general selection.
