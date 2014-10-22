@@ -38,12 +38,17 @@ clock_t _isotope_lastwrite = 0;
 int isotope_maxRate = 125;
 void _isotope_ratelimit() {
     clock_t now;
+    double delay;
+    double minDelay;
     
     if(!isotope_maxRate) return;
     
     now = clock();
-    if(1.0 * (now - _isotope_lastwrite) / CLOCKS_PER_SEC < 1.0 / isotope_maxRate)
-        usleep(1e6 * (now - _isotope_lastwrite) / CLOCKS_PER_SEC);
+    delay = (now - _isotope_lastwrite) * 1.0 / CLOCKS_PER_SEC;
+    minDelay = 1.0 / isotope_maxRate;
+    
+    if(delay < minDelay)
+        usleep((useconds_t)(1e6 * (minDelay - delay)));
     _isotope_lastwrite = clock();
 }
 
