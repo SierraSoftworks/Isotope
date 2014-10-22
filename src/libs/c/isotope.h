@@ -12,7 +12,7 @@
 
 /**
  * Configures the maximum transmission rate in commands per second (Hz)
- * to be used by this library. By default this is 1000Hz to prevent issues
+ * to be used by this library. By default this is 500Hz to prevent issues
  * with the USB HID protocol.
  * May be set to 0 to disable rate limiting.
  */
