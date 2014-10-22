@@ -183,8 +183,7 @@ const char _isotope_map_mutable[] = {
 int isotope_text(int isotope, const char* text) {
     int written = 0;
     char current, *index;
-    char lastKey = 0, key = 0;
-    char lastModifiers = 0, modifiers = 0;
+    char key = 0, modifiers = 0;
     
     while(current = *text++) {
         modifiers = 0;
@@ -198,12 +197,9 @@ int isotope_text(int isotope, const char* text) {
             modifiers = MODIFIERKEY_SHIFT;
         } else continue;
         
-        if(lastModifiers == modifiers && lastKey == key)
-            written += isotope_keyboard(isotope, 0, 0, 0);
-        lastModifiers = modifiers;
-        lastKey = key;
         
         written += isotope_keyboard(isotope, modifiers, &key, 1);
+        written += isotope_keyboard(isotope, 0, 0, 0);
     }
     written += isotope_keyboard(isotope, 0, 0, 0);
     return written;
