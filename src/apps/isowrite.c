@@ -38,6 +38,7 @@ int main(int argc, const char** argv) {
         while(text = cmd_nextArgument()) {
             if(hasWritten) isotope_text(isotope, " ");
             isotope_text(isotope, text);
+            hasWritten = 1;
         }
         isotope_close(isotope);
         return 0;
