@@ -13,6 +13,7 @@
 #include "keylayouts.h"
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 #ifdef RPI
 #define ISOTOPE_IO
@@ -31,6 +32,19 @@
  */
 int _isotope_pack(short axis1, short axis2, short axis3) {
 	return 0x00000000 | ((axis1 & 0x3ff) << 20) | ((axis2 & 0x3ff) << 10) | (axis3 & 0x3ff);
+}
+
+clock_t _isotope_lastwrite = 0;
+int isotope_maxRate = 1000;
+void _isotope_ratelimit() {
+    clock_t now;
+    
+    if(!isotope_maxRate) return;
+    
+    now = clock();
+    if((now - _isotope_lastwrite) / CLOCKS_PER_SEC < 1 / isotope_maxRate)
+        usleep(1e6 * (now - _isotope_lastwrite) / CLOCKS_PER_SEC);
+    _isotope_lastwrite = clock();
 }
 
 /*
@@ -59,7 +73,7 @@ int isotope_open(const char* device) {
 	struct termios options;
 
 	tcgetattr(uart, &options);
-	options.c_cflag = B38400 | CS8 | CLOCAL;		//<Set baud rate
+	options.c_cflag = B115200 | CS8 | CLOCAL;		//<Set baud rate
 	options.c_iflag = PARENB;
 	options.c_oflag = 0;
 	options.c_lflag = 0;
@@ -80,6 +94,8 @@ char isotope_close(int handle) {
 }
 
 char isotope_write(int isotope, const char* packet, char packet_length) {
+        _isotope_ratelimit();
+        
 	#ifdef ISOTOPE_FIO
 	return fwrite(packet, sizeof(char), packet_length, (FILE*)isotope);
 	#endif

@@ -22,7 +22,7 @@ int proto_int(char start);
 
 void setup() {
   // Initialize the UART
-  Serial1.begin(38400);
+  Serial1.begin(115200);
   
   // Enable manual mode for Joystick timing
   Joystick.useManualSend(true);

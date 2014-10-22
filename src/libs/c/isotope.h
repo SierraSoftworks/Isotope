@@ -11,6 +11,14 @@
 #define ISOTOPE_H
 
 /**
+ * Configures the maximum transmission rate in commands per second (Hz)
+ * to be used by this library. By default this is 1000Hz to prevent issues
+ * with the USB HID protocol.
+ * May be set to 0 to disable rate limiting.
+ */
+int isotope_maxRate;
+
+/**
  * Opens a new Isotope using the specified device to communicate, e.g. /dev/ttyUART0
  * @param device The device to open for interaction between the Isotope and this library
  * @returns isotope The unique Isotope ID used for submission of emulation requests
