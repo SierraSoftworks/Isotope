@@ -42,7 +42,7 @@ void _isotope_ratelimit() {
     if(!isotope_maxRate) return;
     
     now = clock();
-    if((now - _isotope_lastwrite) / CLOCKS_PER_SEC < 1 / isotope_maxRate)
+    if(1.0 * (now - _isotope_lastwrite) / CLOCKS_PER_SEC < 1.0 / isotope_maxRate)
         usleep(1e6 * (now - _isotope_lastwrite) / CLOCKS_PER_SEC);
     _isotope_lastwrite = clock();
 }
