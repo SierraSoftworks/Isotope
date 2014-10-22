@@ -48,7 +48,7 @@ void _isotope_ratelimit() {
     minDelay = 1.0 / isotope_maxRate;
     
     if(delay < minDelay)
-        usleep((useconds_t)(1e6 * (minDelay - delay)));
+        usleep(1e6 * (minDelay - delay));
     _isotope_lastwrite = clock();
 }
 
