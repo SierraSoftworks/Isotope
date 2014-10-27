@@ -43,22 +43,20 @@ void loop() {
   for(i = 0; i < 32; i++) rx_buffer[i] = 0;
   
   // Read the header
-  if(!read_blocking(rx_buffer, READ_TIMEOUT)) {
-    digitalWrite(11, LOW);
+  if(!read_blocking(rx_buffer, READ_TIMEOUT) || rx_buffer[0] == 0xf8) {
+  	digitalWrite(11, LOW);
     return;
   }
-  
   
   // Process the header values and store their outputs
   opcode = proto_opcode(rx_buffer[0]);
   args = proto_args(rx_buffer[0]);
   
   // Read the arguments
-  for(i = 1; i <= args; i++)
-    if(!read_blocking(rx_buffer + i, READ_TIMEOUT)) {
-      digitalWrite(11, LOW);
-      return;
-    }
+  if(!read_n_blocking(rx_buffer + 1, args, READ_TIMEOUT)) {
+    digitalWrite(11, LOW);
+    return;
+  }
   
   // Call the function responsible for the relevant op-code
   switch(opcode) {
@@ -136,16 +134,21 @@ void on_joystick() {
 
 // Utility functions
 char read_blocking(char* target, int max_attempts) {
-  byte tmp;
   while(max_attempts--) {
     if(!Serial1.available()) continue;
-    tmp = Serial1.read();
-    if(tmp == 0xf8) continue;
-    
-    *target = tmp;
+    *target = Serial1.read();
     return 1;
   }
   return 0;
+}
+
+char read_n_blocking(char* target, char length, int max_attempts) {
+  byte tmp;
+  char count = 0;
+  while(max_attempts-- && count < length) {
+    count += Serial1.readBytes(target + count, length - count);
+  }
+  return count == length;
 }
 
 char proto_opcode(char header) {
