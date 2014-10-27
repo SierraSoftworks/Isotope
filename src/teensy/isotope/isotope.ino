@@ -29,6 +29,12 @@ void setup() {
   
   // Turn on the LED
   pinMode(11, OUTPUT);
+  digitalWrite(11, HIGH);
+
+  usb_init();
+  while(!usb_configured);
+
+  // Turn the LED off
   digitalWrite(11, LOW);
 }
 
