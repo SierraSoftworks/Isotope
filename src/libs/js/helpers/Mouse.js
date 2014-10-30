@@ -54,10 +54,10 @@ Mouse.prototype = {
 
 Mouse.prototype.queueUpdate = function() {
 	if(!this.updateTimeout)
-		this.updateTimeout = setTimeout((function() {
+		this.updateTimeout = process.nextTick((function() {
 			this.updateTimeout = null;
 			this.now();
-		}).bind(this), 0);
+		}).bind(this));
 	return this;
 };
 
