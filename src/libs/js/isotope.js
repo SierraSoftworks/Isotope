@@ -19,11 +19,14 @@ module.exports = Isotope;
 function Isotope(device) {
 	this.open = false;
 	this.buffer = [];
+	this.maxRate = 500;
+
+	this.lastWrite = 0;
 	this.writeInterval = null;
 
 	if(typeof device == "string")
 		this.uart = new SerialPort(device, {
-			baudrate: 38400,
+			baudrate: 115200,
 			parity: 'even'
 		});
 	else this.uart = device;
@@ -34,14 +37,13 @@ function Isotope(device) {
 	this.uart.on('open', (function() {
 		this.open = true;
 		if(!this.writeInterval) {
-			this.writeInterval = setInterval(this.flush.bind(this), 1);
+			this.writeInterval = setInterval(this.send.bind(this), 1);
 			this.writeInterval.unref();
 		}
 		this.emit('open');
 	}).bind(this));
 
 	this.uart.on('data', (function(data) {
-		console.log("%s", data.toString('hex'));
 		this.emit('data', data);
 	}).bind(this));
 
@@ -64,23 +66,27 @@ Isotope.keyboard = require('./keycodes/keyboard');
 Isotope.mouse = require('./keycodes/mouse');
 
 Isotope.prototype.send = function(packet) {
-	this.buffer.push(packet);
-};
-
-Isotope.prototype.flush = function() {
-	while(this.buffer.length) {
-		var packet = this.buffer.shift();
-		this.uart.write(packet);
-	}
+	if(packet) this.buffer.push(packet);
+	if(!this.buffer.length) return;
+	if(new Date().getTime() - this.lastWrite < 1/this.maxRate) return;
+	this.lastWrite = new Date().getTime();
+	packet = this.buffer.shift();
+	for(var i = 0; i < packet.length; i++)
+		if(typeof packet[i] != 'number') {
+			this.emit('error', new Error("All packet elements should be numbers, but we were given a '"
+				+ (typeof packet[i]) + "' instead."));
+			return;
+		}
+	this.uart.write(packet);
 };
 
 Isotope.prototype.mouseRaw = function(buttons, deltaX, deltaY, deltaScroll) {
 	var packet = zeros(5), length = 4;
 	packet[0] = 0x40;
-	packet[1] = buttons;
-	packet[2] = deltaX;
-	packet[3] = deltaY;
-	packet[4] = deltaScroll;
+	packet[1] = 0xff & (buttons || 0);
+	packet[2] = 0xff & (deltaX || 0);
+	packet[3] = 0xff & (deltaY || 0);
+	packet[4] = 0xff & (deltaScroll || 0);
 
 	if(!deltaScroll) {
 		length--;
@@ -105,9 +111,9 @@ Isotope.prototype.keyboardRaw = function(modifiers, keys) {
 	if(!Array.isArray(keys)) throw new Error("Keys should be an array");
 	if(keys.length > 6) throw new Error("A maximum of 6 keys can be pressed at any time.");
 
-	packet[1] = modifiers;
+	packet[1] = modifiers & 0xff;
 	for(var i = 0; i < keys.length; i++)
-		packet[i + 2] = keys[i];
+		packet[i + 2] = 0xff & (keys[i] || 0);
 
 	packet[0] |= keys.length + 1;
 	this.send(packet.slice(0, 2 + keys.length));
