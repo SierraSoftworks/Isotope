@@ -188,6 +188,10 @@
                         <i class="fa fa-undo"></i> to clear the currently pressed keys.
 					</p>
                     
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Click Here" ng-focus="api('keyboard', { keys: ['a'] })" ng-leave="api('keyboard', { })"/>
+					</div>
+					
                     <div class="btn-group btn-group-lg">
                         <a class="btn btn-default" ng-click="api('keyboard', { keys: ['a'] })">a</a>
                         <a class="btn btn-default" ng-click="api('keyboard', { keys: ['a'], modifiers: ['shift'] })">A</a>
