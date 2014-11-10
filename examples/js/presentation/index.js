@@ -7,7 +7,7 @@ var app = express(),
 app.use(express.static('public'));
 app.use(require('body-parser').json());
 
-app.get('/api/mouse', function(req, res) {
+app.post('/api/mouse', function(req, res) {
     isotope.mouse.move(req.body.x || 0, req.body.y || 0);
     isotope.mouse.scroll(req.body.scroll || 0);
     ['left', 'right', 'middle'].forEach(function(key) {
