@@ -65,7 +65,7 @@ app.get('/api/*', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-    return res.sendFile('public/index.html', { root: process.cwd() });
+    return res.sendFile('public/index.html', { root: __dirname });
 });
 
 isotope.on('error', function(err) {

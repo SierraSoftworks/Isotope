@@ -39,7 +39,7 @@ app.get('/api/*', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-    return res.sendFile('public/index.html', { root: process.cwd() });
+    return res.sendFile('public/index.html', { root: __dirname });
 });
 
 app.listen(process.env.port || 3000);
