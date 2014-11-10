@@ -43,7 +43,7 @@ angular.module('SierraControllers', ['mgcrea.ngStrap'])
 
 	var transitioning = false;
 
-	$scope.previousSlide = 'home';
+	$scope.previousSlide = 'header';
 	$scope.nextSlide = $scope.slides[0].id;
 	$scope.lastSlide = $scope.slides[$scope.slides.length - 1].id;
 
@@ -62,11 +62,11 @@ angular.module('SierraControllers', ['mgcrea.ngStrap'])
 
 		if(actualSlide) {
 			var index = getSlideIndex(actualSlide);
-			if(!index) $scope.previousSlide = 'home';
+			if(!index) $scope.previousSlide = 'header';
 			else $scope.previousSlide = $scope.slides[index - 1].id;
 
 			if(index < $scope.slides.length - 1) $scope.nextSlide = $scope.slides[index + 1].id;
-		}
+		} else actualSlide = $(slide);
 
 		$document.scrollToElement(actualSlide, 0, 500).then(function() {
 			transitioning = false;
@@ -91,7 +91,7 @@ angular.module('SierraControllers', ['mgcrea.ngStrap'])
 		if(!current) return;
 		var index = getSlideIndex(current);
 		desiredIndex = index;
-		if(!index) $scope.lastSlide = 'home';
+		if(!index) $scope.previousSlide = 'header';
 		else $scope.previousSlide = $scope.slides[index - 1].id;
 
 		if(index < $scope.slides.length - 1) $scope.nextSlide = $scope.slides[index + 1].id;
@@ -102,6 +102,12 @@ angular.module('SierraControllers', ['mgcrea.ngStrap'])
 	}, 100);
 
 	$($window).scroll(onScroll);
+    
+    
+    $scope.start = function() {
+        $('#presentation').focus();
+        $scope.switchSlide('#' + $scope.nextSlide);
+    };
     
     $scope.api = function(method, options) {
         $http.post('/api/' + method, options).then(function() {
