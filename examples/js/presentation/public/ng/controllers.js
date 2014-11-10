@@ -33,12 +33,12 @@ angular.module('SierraControllers', ['mgcrea.ngStrap'])
             if (result.substring(result.length - 1, result.length) == "." || result.substring(result.length - 1, result.length) == "?") {
                 newText = newText.substring(0,1).toUpperCase() + newText.substring(1, newText.length);
 			}
-            
+
             result += " " + newText;
 	   }
-        
-        return result;
-    }; 
+
+        return 'Lorem ipsum' + result;
+    };
 })
 .controller('HomeCtrl', ['$scope', '$window', '$document', '$http', 'LoremIpsum', function($scope, $window, $document, $http, loremIpsum) {
     $scope.slides = $('[slide]');
@@ -106,18 +106,15 @@ angular.module('SierraControllers', ['mgcrea.ngStrap'])
 	}, 100);
 
 	$($window).scroll(onScroll);
-    
-    
+
     $scope.start = function() {
         $('#presentation').focus();
         $scope.switchSlide('#' + $scope.nextSlide);
     };
-    
+
     $scope.api = function(method, options) {
-        $http.post('/api/' + method, options).then(function() {
-            
-        }, $scope.httpError);
+        $http.post('/api/' + method, options).then(angular.noop, $scope.httpError);
     };
-    
+
 	$scope.appLoading(false);
 }]);
