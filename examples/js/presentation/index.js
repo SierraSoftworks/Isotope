@@ -8,11 +8,6 @@ var app = express(),
 app.use(express.static('public'));
 app.use(require('body-parser').json());
 
-app.use(function(req, res, next) {
-	console.log('%s - %j', req.url, req.body);
-	return next();
-});
-
 app.post('/api/mouse', function(req, res) {
     isotope.mouse.move(req.body.x || 0, req.body.y || 0);
     isotope.mouse.scroll(req.body.scroll || 0);
@@ -48,7 +43,6 @@ app.post('/api/keyboard', function(req, res) {
     isotope.keyboard.now();
     if(req.body.release)
         isotope.keyboard.releaseAll.now();
-	console.log(isotope.buffer);
     return res.status(200).end();
 });
 
