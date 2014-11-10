@@ -1,0 +1,11 @@
+{
+    "name": "isotope-demo",
+    "author": "Benjamin Pannell <admin@sierrasoftworks.com>",
+    "version": "1.0.0",
+    
+    "dependencies": {
+        "express": "4.x",
+        "libisotope": "*",
+        "body-parser": "*"
+    }
+}

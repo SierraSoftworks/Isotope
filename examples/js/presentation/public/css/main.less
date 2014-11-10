@@ -1,0 +1,78 @@
+@import "bootstrap/bootstrap.less";
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	background: #fff;
+}
+
+.view-container {
+	background: #fff;
+	min-height: 100%;
+	min-height: 100vh;
+}
+
+
+h1.name {
+	letter-spacing: -1px;
+	font-weight: 300;
+	font-size: 6em;
+	line-height: 1em;
+	small {
+		font-weight: 100;
+		font-size: 0.25em;
+	}
+}
+
+.links {
+	margin-top: 15px;
+	margin-bottom: 0;
+	padding-left: 0;
+	list-style: none;
+	font-size: 14px;
+				
+	.glyphicon,
+	.fa {
+		font-size: inherit;
+		line-height: inherit;
+		margin-right: 1em;
+		color: inherit;
+	}
+
+	li {
+		display: inline;
+		& + li {
+			margin-left: 20px;
+		}
+	}
+}
+
+#view {
+	
+}
+
+a.nohover:hover {
+	color: initial;
+}
+
+a:hover,
+a:focus {
+	text-decoration: none;
+}
+
+
+@import "input-plain.less";
+@import "utilities.less";
+@import "documentation.less";
+@import "navbar.less";
+@import "jumbotron.less";
+@import "fa-extras.less";
+@import "featurette.less";
+@import "parallax.less";
+@import "notifications.less";
+@import "footer.less";
+@import "spinkit.less";
+@import "highlighting.less";

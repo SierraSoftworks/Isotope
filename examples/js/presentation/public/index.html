@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="en" ng-app="SierraApp">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="fragment" content="!">
+		<meta name="prerender-status-code" content="{{statusCode}}">
+		
+		<title ng-bind="appTitle() + ' | Isotope'">Isotope</title>
+
+		<!--ngCloak-->
+		<style type="text/css">[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }</style>
+
+		<!--Stylesheets-->
+		<link rel="stylesheet" href="/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="/css/main.min.css"/>
+		<link rel="stylesheet" href="/css/bootstrap-additions.min.css"/>
+	</head>
+
+	<body ng-controller="AppCtrl" skrollr="document">
+		<section id="page-container">
+			<section id="loading" class="view-container parallax" slide ng-show="appLoading()">
+				<div class="background" style="background-color: #2980B9; background-image: linear-gradient(-75deg, #2980B9, #1970A9)"></div>
+				<div class="container fill" ng-click="appLoading(false)">
+					<div class="row center">
+						<div class="col-lg-12" style="text-align: center;">
+							<div class="spinner spinner-lg">
+								<div class="double-bounce1" style="background-color: #fff"></div>
+								<div class="double-bounce2" style="background-color: #fff"></div>
+							</div>							
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="error" class="view-container" ng-show="appError" ng-cloak ng-include="'/ngt/errors.html'"></section>
+			<section id="view" class="view-container" ng-hide="appLoading() || appError" ng-view ng-cloak></section>
+		</section>
+
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center"
+						data-anchor-target="footer"
+						data-bottom-top="top: 100px;"
+						data-bottom-bottom="top: 0px;">
+						<p class="lead">
+							Find us on...
+						</p>
+						<p>
+							<a href="https://git.sierrasoftworks.com" class="fa fa-fw fa-2x fa-git-square"></a>
+							<a href="https://github.com/sierrasoftworks" class="fa fa-fw fa-2x fa-github-square"></a>
+							<a href="https://plus.google.com/+sierrasoftworks" class="fa fa-fw fa-2x fa-google-plus-square"></a>
+							<a href="https://facebook.com/sierrasoftworks" class="fa fa-fw fa-2x fa-facebook-square"></a>
+							<a href="https://twitter.com/sierrasoftworks" class="fa fa-fw fa-2x fa-twitter-square"></a>
+						</p>
+						<p class="small">Powered by <a href="https://sierrasoftworks.com">Sierra Softworks</a> Technology</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+		 <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		<!--Javascript Libraries-->
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/angular.min.js"></script>
+		<script src="/js/angular-route.min.js"></script>
+		<script src="/js/lodash.min.js"></script>
+		<script src="/js/angular-scroll.min.js"></script>
+		<script src="/js/angular-strap.min.js"></script>
+		<script src="/js/angular-strap.tpl.min.js"></script>
+		<script src="/js/angular-bootstrap-custom.js"></script>
+		<script type="text/javascript" src="/js/skrollr.min.js"></script>
+
+		<!--Angular.js Setup-->
+		<script src="/ng/controllers.js"></script>
+		<script src="/ng/directives.js"></script>
+		<script src="/ng/filters.js"></script>
+		<script src="/ng/services.js"></script>
+		<script src="/ng/app.js"></script>
+	</body>
+</html>

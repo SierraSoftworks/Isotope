@@ -1,0 +1,52 @@
+i.edit-button {
+	color: #999;
+	font-size: 0.7em;
+
+	-o-transition: color linear 0.2s;
+	-webkit-transition: color linear 0.2s;
+	-moz-transition: color linear 0.2s;
+	transition: color linear 0.2s;
+
+	&:hover {
+		color: #428BCA;
+	}
+}
+
+.input-plain {
+	position: absolute;
+	background: inherit;
+	color: inherit;
+	display: block;
+	box-sizing: border-box;
+	border: none;
+	border-radius: 0;
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	width: 100%;
+
+	-o-transition: color linear 0.2s;
+	-webkit-transition: color linear 0.2s;
+	-moz-transition: color linear 0.2s;
+	transition: color linear 0.2s;
+
+	&:focus,
+	&:hover,
+	&:active {
+		width: 100%;
+	}
+
+	&.active {
+		color: #428BCA;
+	}
+}
+
+.input-plain-container {
+	position: relative;
+	display: inline-block;
+}
+
+.input-plain-sizer {
+	visibility: hidden;
+	padding: 2px;
+}

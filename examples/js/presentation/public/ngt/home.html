@@ -1,0 +1,208 @@
+<div id="header" class="jumbotron parallax" slide>
+	<div class="background" style="background-image: linear-gradient(-75deg, #2980B9, #1970A9)"></div>
+
+	<div class="container fill">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="text-center">
+					<i class="fa fa-plug fa-massive"></i>
+				</div>
+
+				<h1 class="name">
+					Isotope
+				</h1>
+				<p class="lead">
+					USB HID Emulation for Embedded Devices
+				</p>
+
+				<hr style="border-color: rgba(255, 255, 255, 0.1)"/>
+
+				<p>
+                    <strong>Benjamin Pannell, Honours Project</strong>
+                    <br/>
+                    Electrical &amp; Electronic Engineering 2014
+                    <br/>
+                    Stellenbosch University
+                </p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section>
+	<section id="introduction" class="parallax" slide>
+		<div class="background" style="background: #fff"></div>
+
+		<div class="container fill">
+			<div class="row featurette">
+				<div class="col-lg-12 text-center">
+					<h2>
+						<i class="fa fa-code-fork fa-huge"></i>
+						<br>
+						What is Isotope?
+					</h2>
+					<p class="lead">What does it do and why is it necessary?</p>
+				</div>
+			</div>
+
+			<hr style="border-color: rgba(0,0,0,0.2)">
+
+			<div class="row">
+				<div class="col-sm-4 text-center">
+					<div class="fa fa-volume-up fa-big"></div>
+					<h4>Speech Recognition</h4>
+					<p class="text-justify">
+						Speech recognition hardware is of particular interest at the Universy of Stellenbosch.
+                        A critical aspect of these devices is the ability to convey input to the host machine,
+                        requiring the implementation of a communications protocol.
+					</p>
+				</div>
+				<div class="col-sm-4 text-center">
+					<div class="fa fa-linux fa-big"></div>
+					<h4>Universal Compatibility</h4>
+					<p class="text-justify">
+						To simplify the development of these devices it makes sense to select a protocol which
+                        has already been widely adopted and implemented. The USB Human Interface Device protocol
+                        meets these requirements perfectly - with drivers available for most major operating
+                        systems.
+					</p>
+				</div>
+				<div class="col-sm-4 text-center">
+					<div class="fa fa-cubes fa-big"></div>
+					<h4>Simple Implementation</h4>
+					<p class="text-justify">
+						Rather than develop a device specific implementation, it was decided that a simple
+                        addon board which could be ported to a number of different master devices would offer
+                        the best capacity for future expansion as embedded device performance increases.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="features" class="parallax" slide>
+		<div class="background" style="background-image: linear-gradient(-75deg, #4b6cb7, #182848)"></div>
+
+		<div class="container fill" style="color: #fff">
+			<div class="row featurette">
+				<div class="col-xs-12 text-center">
+					<h2>
+						<i class="fa fa-sitemap fa-huge"></i>
+						<br>
+						Device Architecture
+					</h2>
+					<p class="lead">What components make up Isotope?</p>
+				</div>
+			</div>
+
+			<hr style="border-color: rgba(255,255,255,0.1)">
+
+			<div class="row">
+				<div class="col-sm-4 text-center">
+					<div class="fa fa-gears fa-big"></div>
+					<h4>Master Device</h4>
+					<p class="text-justify">
+						The master device, in this case a Raspberry Pi computer, is responsible for determining
+                        when to execute each emulation operation. This can be driven by a web frontend as we will
+                        see here, a voice recognition engine or a simple cron job.
+					</p>
+				</div>
+				<div class="col-sm-4 text-center">
+					<div class="fa fa-plug fa-big"></div>
+					<h4>Isotope</h4>
+					<p class="text-justify">
+						The emulation device accepts an emulation command from the master device and converts it
+                        into a form which is understandable by the host device - using the USB HID specification
+                        as a basis for this.
+					</p>
+				</div>
+				<div class="col-sm-4 text-center">
+					<div class="fa fa-laptop fa-big"></div>
+					<h4>Host Device</h4>
+					<p class="text-justify">
+						The host device implements a USB HID host mode driver and will automatically interpret the
+                        emulation commands it receives as though they were true user input. This makes Isotope
+                        almost completely indistinguishable from a standard mouse and keyboard.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="demo1" class="parallax" slide>
+		<div class="background" style="background: #fff"></div>
+
+		<div class="container fill">
+			<div class="row featurette">
+				<div class="col-xs-12 text-center">
+					<h2>
+						<i class="fa fa-rocket fa-huge"></i>
+						<br>
+						Demonstration
+					</h2>
+					<p class="lead">Let's have some fun with Isotope to show off what it can do</p>
+				</div>
+			</div>
+
+			<hr style="border-color: rgba(0,0,0,0.1)">
+
+			<div class="row">
+				<div class="col-sm-4 text-center">
+					<div class="row">
+                        <div class="fa fa-crosshairs fa-big"></div>
+                        <h4>Mouse Emulation</h4>
+                        <p class="text-justify">
+                            Use the arrow-pad below to move the mouse about in 5-unit increments. If you notice
+                            any delay, it's likely the HTTP protocol we're using to send commands to the Raspberry Pi
+                            from your web browser.
+                        </p>
+                    </div>
+					<div class="row text-center">
+                        <a class="btn btn-default btn-lg">
+                            <i class="fa fa-long-arrow-up" ng-click="api('mouse', { y: 5 })"></i>
+                        </a>
+                    </div>
+					<div class="row btn-group btn-group-lg">
+                        <div class="col-sm-4 btn btn-default" ng-click="api('mouse', { x: -5 })">
+                            <i class="fa fa-long-arrow-left"></i>
+                        </div>
+                        <div class="col-sm-4 btn btn-default" ng-click="api('mouse', { y: -5 })">
+                            <i class="fa fa-long-arrow-down"></i>
+                        </div>
+                        <div class="col-sm-4 btn btn-default" ng-click="api('mouse', { x: 5 })">
+                            <i class="fa fa-long-arrow-right"></i>
+                        </div>
+                    </div>
+				</div>
+				<div class="col-sm-4 text-center">
+					<div class="fa fa-font fa-big"></div>
+					<h4>Keyboard Emulation</h4>
+					<p class="text-justify">
+						Keyboard emulation allows you to easily set whatever keys you want to be "pressed"
+                        by the virtual keyboard. Click on any of the buttons below to try it out, or click
+                        <i class="fa fa-undo"></i> to clear the currently pressed keys.
+					</p>
+                    
+                    <div class="btn-group btn-group-lg">
+                        <a class="btn btn-default" ng-click="api('keyboard', { keys: ['a'] })">a</a>
+                        <a class="btn btn-default" ng-click="api('keyboard', { keys: ['a'], modifiers: ['shift'] })">A</a>
+                        <a class="btn btn-default" ng-click="api('keyboard', { keys: ['delete'], modifiers: ['ctrl', 'alt'], release: true })">Ctrl+Alt+Delete</a>
+                        <a class="btn btn-info" ng-click="api('keyboard', { })"><i class="fa fa-undo"></i></a>
+                    </div>
+				</div>
+				<div class="col-sm-4 text-center">
+					<div class="fa fa-text-width fa-big"></div>
+					<h4>Text Entry</h4>
+					<p class="text-justify">
+						The Isotope APIs also provide functionality for transcribing ASCII strings using
+                        typeable characters. Here's a demo of a simple Lorem Ipsum Dolor generator which
+                        will type out a couple of sentences in Latin.
+                    </p>
+                    
+                    <a class="btn btn-default btn-lg" ng-click="api('write', loremIpsum(50, 200))">Lorem Ipsum</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</section>

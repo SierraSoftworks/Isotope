@@ -1,0 +1,26 @@
+.parallax {
+	position: relative;
+	overflow: hidden;
+
+	.background {
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-position: center center;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+	}
+
+	.container {
+		position: relative;
+		padding: 2em 0 10em 0;
+
+		&.fill {
+			min-height: 100vh;
+		}
+
+		.fa {
+			padding: 0.1em;
+		}
+	}
+}

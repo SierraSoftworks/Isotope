@@ -1,0 +1,54 @@
+body > .jumbotron,
+section > .jumbotron {
+	position: relative;
+	font-size: 16px;
+	color: #fff;
+	color: rgba(255,255,255,.75);
+	text-align: center;
+	background-color: #222;
+	border-radius: 0;
+	z-index: 1;
+	margin-bottom: 0;
+
+	-moz-transition: all linear 0.2s;
+	-o-transition: all linear 0.2s;
+	-webkit-transition: all linear 0.2s;
+	transition: all linear 0.2s;
+
+	&.parallax {
+		background: transparent;
+		padding: 0;
+	}
+
+	h1.name {
+		color: #fff;
+	}
+
+	p a,
+	.links a {
+		font-weight: 500;
+		color: #fff;
+		-moz-transition: all .1s ease-in-out;
+		-o-transition: all .1s ease-in-out;
+		-webkit-transition: all .1s ease-in-out;
+		transition: all .1s ease-in-out;
+
+		&:hover {
+			-webkit-text-shadow: 0 0 10px rgba(255,255,255,.55);
+			text-shadow: 0 0 10px rgba(255,255,255,.55);
+		}
+	}
+}
+
+@media (min-width: @screen-md) {
+	body > .jumbotron,
+	section > .jumbotron {
+		padding-top: 75px;
+		padding-bottom: 75px;
+		font-size: 21px;
+
+		&.parallax {
+			padding: 0;
+		}
+	}
+}

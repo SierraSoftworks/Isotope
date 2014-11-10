@@ -1,0 +1,100 @@
+h1 > .glyphicon,
+h2 > .glyphicon,
+h3 > .glyphicon {
+	margin-top: 2px;
+	font-size: 80%;
+	margin-right: 0.5em;
+}
+
+.fa-massive {
+	font-size: 10em;
+}
+
+.fa-huge {
+	font-size: 6em;
+}
+
+.fa-big {
+	font-size: 4em;
+}
+
+@media (min-width: @screen-sm) { 
+	.fa-huge {
+		font-size: 8em;
+	}
+
+	.fa-big {
+		font-size: 6em;
+	}
+}
+
+@media (min-width: @screen-lg) { 
+	.fa-massive {
+		font-size: 15em;
+	}
+}
+
+.fa-lg-center,
+.glyphicon-lg-center {
+	margin-left: -20px;
+	font-size: 400%;
+	text-align: center;
+	width: 100%;
+}
+
+.fa-white-c {
+	color: #fff;
+	&:hover {
+		color: @brand-primary;
+	}
+}
+
+.fa-link-c {
+	color: inherit;
+	cursor: pointer;
+	&:hover {
+		color: @brand-primary;
+	}
+}
+
+.fa-muted-c {
+	color: @gray-light;
+	&:hover {
+		color: @brand-primary;
+	}
+}
+
+.fa-primary-c {
+	color: @brand-primary;
+	&:hover {
+		color: lighten(@brand-primary, 5%);
+	}
+}
+
+.fa-info-c {
+	color: @brand-info;
+	&:hover {
+		color: lighten(@brand-info, 5%);
+	}
+}
+
+.fa-success-c {
+	color: @brand-success;
+	&:hover {
+		color: lighten(@brand-success, 5%);
+	}
+}
+
+.fa-warning-c {
+	color: @brand-warning;
+	&:hover {
+		color: lighten(@brand-warning, 5%);
+	}
+}
+
+.fa-danger-c {
+	color: @brand-danger;
+	&:hover {
+		color: lighten(@brand-danger, 5%);
+	}
+}

@@ -1,0 +1,41 @@
+.featurette-divider {
+	margin: 100px 0 0 0 !important;
+}
+
+.featurette {
+	h2 {
+		font-weight: normal;
+		margin-top: 20px;
+	}
+
+	&> .row {
+		margin: 50px 0;
+
+		&:first-of-type {
+			margin-top: 0;
+		}
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	.header-align {
+		margin-top: 20px;
+	}
+
+	.h3-align {
+		margin-top: 1em;
+	}
+}
+
+@media (min-width: @screen-sm) { 
+	.featurette {
+		h2 {
+			margin-top: 50px;
+		}
+		.header-align {
+			margin-top: 50px;
+		}
+	}
+}

@@ -1,0 +1,113 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1>{{appError.data.error || 'Application Error'}}</h1>
+			<p>{{appError.data.message || 'An unknown error occurred when processing your request.'}}</p>
+		</div>
+	</div>
+	
+	<hr/>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div ng-switch="appError.status">
+				<div ng-switch-when="0">
+					<p>
+						It looks like we were unable to connect to our server, this probably indicates that
+						you've lost connection to the internet or that our server has gone down. If it's an
+						error on our side, please try again in a few minutes to see if we've managed to fix
+						the problem yet.
+					</p>
+					<p>
+						If you suspect it's a problem with our server, you can use the link below to check
+						if anyone else can access our server.
+					</p>
+					<p><a href="http://www.downforeveryoneorjustme.com/sierrasoftworks.com">Check Server</a></p>
+				</div>
+				<div ng-switch-when="400">
+					<p>
+						This error is returned when there is something wrong with the way in which you made your
+						request. This could either indicate that the library you're using was poorly written or
+						that one of the values you specified did not meet the requirements for validation.
+						<br/>
+						The error message below may give more information about what happened and how you can
+						go about fixing it.
+					</p>
+					<pre><code ng-bind="appError.data.message"></code></pre>
+				</div>
+				<div ng-switch-when="401">
+					<p>
+						This error is returned when you attempt to access a page which is only accessible to
+						users who have signed in. In order to access the page, you will need to login to your
+						account by clicking the <i class="fa fa-fw fa-sign-in"></i> button in the top-right
+						corner of the page.
+					</p>
+				</div>
+				<div ng-switch-when="403">
+					<p>
+						This error occurs when you attempt to access a page which you don't have permission for.
+						There are a rare few circumstances where you might not be able to access a page in this
+						manner because we have forgotten to grant you access, if this is the case then please
+						send us an email explaining the problem and we'll get right on it.
+					</p>
+					<p>
+						You'll need to include the following information in your email to us, and preferably send
+						it from the email address you signed in with. Please also include an explanation for why
+						you feel you should have access to this page to allow us to quickly address your concerns.
+					</p>
+					<p>
+						<strong>Username</strong> {{appUser.id}}
+						<br/>
+						<strong>E-Mail</strong> {{appUser.details.email}}
+						<br/>
+						<strong>Page</strong> {{appUrl}}
+					</p>
+				</div>
+				<div ng-switch-when="404">
+					<p>
+						This error occurs when you attempt to access a page or resource on our server which doesn't
+						exist. This could be because it was removed, or because you have made an invalid request. In
+						any case, please double-check what it is you were looking for and try again.
+					</p>
+					<p>
+						Please also be aware that we are notified of all requests which result in a Not Found error
+						so, if for some reason a valid page is giving this error, we will fix it as soon as possible.
+					</p>
+				</div>
+				<div ng-switch-when="500">
+					<p>
+						This error occurs when something goes wrong on our server, generally it doesn't mean you did
+						anything incorrectly however if you think you might have caused it then feel free to retry
+						your request with different data.
+					</p>
+					<p>
+						In the mean time, we've been notified of this issue and will get to fixing it as soon as possible
+						so that you experience the smallest possible interruption in service.
+					</p>
+				</div>
+				<div ng-switch-when="502">
+					<p>
+						This is a nasty error which means our server has gone down, we try to respond to these as quickly as
+						possible but it's not always apparent when they happen. If you've been getting this error for a while
+						we ask that you send us an email at <a href="mailto:admin@sierrasoftworks.com">admin@sierrasoftworks.com</a>
+						with the header <strong>Frontier - 502</strong> and we'll get on it as quickly as possible.
+					</p>
+				</div>
+				<div ng-switch-when="503">
+					<p>
+						It looks like we're currently experiencing very high traffic, most of our website should still work but some
+						things (like the one you just tried to use) will be throttled. Please try again in a second, or wait for the
+						load to subside.
+						<br>
+						We're sorry for any inconvinience this may have caused, and we'll be working hard to expand our capacity to ensure
+						this issue doesn't have any lasting effect on the service.
+					</p>
+				</div>
+				<div ng-switch-default>
+					<pre><code ng-bind="appError | json"></code></pre>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
