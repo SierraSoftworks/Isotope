@@ -1,36 +1,36 @@
-<div id="header" class="jumbotron parallax" slide>
-	<div class="background" style="background-image: linear-gradient(-75deg, #2980B9, #1970A9)"></div>
+<section tabindex="0" ng-keyup="onKeypress($event)">
+    <div id="header" class="jumbotron parallax" slide>
+        <div class="background" style="background-image: linear-gradient(-75deg, #2980B9, #1970A9)"></div>
 
-	<div class="container fill">
-		<div class="row">
-			<div class="col-lg-12">
+        <div class="container fill">
+            <div class="row">
+                <div class="col-lg-12">
 
-				<div class="text-center">
-					<i class="fa fa-plug fa-massive"></i>
-				</div>
+                    <div class="text-center">
+                        <i class="fa fa-plug fa-massive"></i>
+                    </div>
 
-				<h1 class="name">
-					Isotope
-				</h1>
-				<p class="lead">
-					USB HID Emulation for Embedded Devices
-				</p>
+                    <h1 class="name">
+                        Isotope
+                    </h1>
+                    <p class="lead">
+                        USB HID Emulation for Embedded Devices
+                    </p>
 
-				<hr style="border-color: rgba(255, 255, 255, 0.1)"/>
+                    <hr style="border-color: rgba(255, 255, 255, 0.1)"/>
 
-				<p>
-                    <strong>Benjamin Pannell, Honours Project</strong>
-                    <br/>
-                    Electrical &amp; Electronic Engineering 2014
-                    <br/>
-                    Stellenbosch University
-                </p>
-			</div>
-		</div>
-	</div>
-</div>
-
-<section>
+                    <p>
+                        <strong>Benjamin Pannell, Honours Project</strong>
+                        <br/>
+                        Electrical &amp; Electronic Engineering 2014
+                        <br/>
+                        Stellenbosch University
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 	<section id="introduction" class="parallax" slide>
 		<div class="background" style="background: #fff"></div>
 
@@ -201,6 +201,56 @@
                     </p>
                     
                     <a class="btn btn-default btn-lg" ng-click="api('write', loremIpsum(50, 200))">Lorem Ipsum</a>
+				</div>
+			</div>
+		</div>
+	</section>
+    
+    <section id="libraries" class="parallax" slide>
+		<div class="background" style="background-image: linear-gradient(-75deg, #283048, #859398)"></div>
+
+		<div class="container fill" style="color: #fff">
+			<div class="row featurette">
+				<div class="col-xs-12 text-center">
+					<h2>
+						<i class="fa fa-code fa-huge"></i>
+						<br>
+						Software Libraries
+					</h2>
+					<p class="lead">How can you integrate Isotope with your software?</p>
+				</div>
+			</div>
+
+			<hr style="border-color: rgba(255,255,255,0.1)">
+
+			<div class="row">
+				<div class="col-sm-4 text-center">
+					<div class="fa fa-file-code-o fa-big"></div>
+					<h4>C-Library</h4>
+					<p class="text-justify">
+						The C-Library provides a low level API through which you can easily access the Isotope
+                        device from both C and C++ code, as well as any framework which provides C interop.
+                        It operates synchronously and includes a high performance rate limiter to prevent performance
+                        issues.
+					</p>
+				</div>
+				<div class="col-sm-4 text-center">
+					<div class="fa fa-cloud fa-big"></div>
+					<h4>Node.js Library</h4>
+					<p class="text-justify">
+						The Node.js library allows you to easily access Isotope from a high performance, asynchronous
+                        scripting language. Node.js is perfect as a loose-coupler for a multitude of services and makes
+                        rapid prototyping a breeze. (This website is powered by 70 lines of Node.js code)
+					</p>
+				</div>
+				<div class="col-sm-4 text-center">
+					<div class="fa fa-terminal fa-big"></div>
+					<h4>Terminal Tools</h4>
+					<p class="text-justify">
+						There's also a number of terminal tools which allow you to easily control an Isotope device
+                        from the command line or bash scripts. This makes testing incredibly easy and even lets you 
+                        pipe the output of other commands into the transcription functions.
+					</p>
 				</div>
 			</div>
 		</div>
