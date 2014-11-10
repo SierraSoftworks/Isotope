@@ -17,7 +17,7 @@ app.post('/api/mouse', function(req, res) {
             isotope.mouse.release(Isotope.mouse[key]);
     });
     
-    isotope.now();
+    isotope.mouse.now();
     if(req.body.release)
         isotope.mouse.releaseAll.now();
     return res.status(200).end();
