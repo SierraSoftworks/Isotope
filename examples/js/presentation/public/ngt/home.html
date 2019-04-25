@@ -35,125 +35,125 @@
         </div>
     </div>
     
-	<section id="introduction" class="parallax" slide>
-		<div class="background" style="background: #fff"></div>
+    <section id="introduction" class="parallax" slide>
+        <div class="background" style="background: #fff"></div>
 
-		<div class="container fill">
-			<div class="row featurette">
-				<div class="col-lg-12 text-center">
-					<h2>
-						<i class="fa fa-code-fork fa-huge"></i>
-						<br>
-						What is Isotope?
-					</h2>
-					<p class="lead">What does it do and why is it necessary?</p>
-				</div>
-			</div>
+        <div class="container fill">
+            <div class="row featurette">
+                <div class="col-lg-12 text-center">
+                    <h2>
+                        <i class="fa fa-code-fork fa-huge"></i>
+                        <br>
+                        What is Isotope?
+                    </h2>
+                    <p class="lead">What does it do and why is it necessary?</p>
+                </div>
+            </div>
 
-			<hr style="border-color: rgba(0,0,0,0.2)">
+            <hr style="border-color: rgba(0,0,0,0.2)">
 
-			<div class="row">
-				<div class="col-sm-4 text-center">
-					<div class="fa fa-volume-up fa-big"></div>
-					<h4>Speech Recognition</h4>
-					<p class="text-justify">
-						Speech recognition hardware is of particular interest at the Universy of Stellenbosch.
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <div class="fa fa-volume-up fa-big"></div>
+                    <h4>Speech Recognition</h4>
+                    <p class="text-justify">
+                        Speech recognition hardware is of particular interest at the Universy of Stellenbosch.
                         A critical aspect of these devices is the ability to convey input to the host machine,
                         requiring the implementation of a communications protocol.
-					</p>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="fa fa-linux fa-big"></div>
-					<h4>Universal Compatibility</h4>
-					<p class="text-justify">
-						To simplify the development of these devices it makes sense to select a protocol which
+                    </p>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="fa fa-linux fa-big"></div>
+                    <h4>Universal Compatibility</h4>
+                    <p class="text-justify">
+                        To simplify the development of these devices it makes sense to select a protocol which
                         has already been widely adopted and implemented. The USB Human Interface Device protocol
                         meets these requirements perfectly - with drivers available for most major operating
                         systems.
-					</p>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="fa fa-cubes fa-big"></div>
-					<h4>Simple Implementation</h4>
-					<p class="text-justify">
-						Rather than develop a device specific implementation, it was decided that a simple
+                    </p>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="fa fa-cubes fa-big"></div>
+                    <h4>Simple Implementation</h4>
+                    <p class="text-justify">
+                        Rather than develop a device specific implementation, it was decided that a simple
                         addon board which could be ported to a number of different master devices would offer
                         the best capacity for future expansion as embedded device performance increases.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-	<section id="features" class="parallax" slide>
-		<div class="background" style="background-image: linear-gradient(-75deg, #4b6cb7, #182848)"></div>
+    <section id="features" class="parallax" slide>
+        <div class="background" style="background-image: linear-gradient(-75deg, #4b6cb7, #182848)"></div>
 
-		<div class="container fill" style="color: #fff">
-			<div class="row featurette">
-				<div class="col-xs-12 text-center">
-					<h2>
-						<i class="fa fa-sitemap fa-huge"></i>
-						<br>
-						Device Architecture
-					</h2>
-					<p class="lead">What components make up Isotope?</p>
-				</div>
-			</div>
+        <div class="container fill" style="color: #fff">
+            <div class="row featurette">
+                <div class="col-xs-12 text-center">
+                    <h2>
+                        <i class="fa fa-sitemap fa-huge"></i>
+                        <br>
+                        Device Architecture
+                    </h2>
+                    <p class="lead">What components make up Isotope?</p>
+                </div>
+            </div>
 
-			<hr style="border-color: rgba(255,255,255,0.1)">
+            <hr style="border-color: rgba(255,255,255,0.1)">
 
-			<div class="row">
-				<div class="col-sm-4 text-center">
-					<div class="fa fa-gears fa-big"></div>
-					<h4>Master Device</h4>
-					<p class="text-justify">
-						The master device, in this case a Raspberry Pi computer, is responsible for determining
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <div class="fa fa-gears fa-big"></div>
+                    <h4>Master Device</h4>
+                    <p class="text-justify">
+                        The master device, in this case a Raspberry Pi computer, is responsible for determining
                         when to execute each emulation operation. This can be driven by a web frontend as we will
                         see here, a voice recognition engine or a simple cron job.
-					</p>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="fa fa-plug fa-big"></div>
-					<h4>Isotope</h4>
-					<p class="text-justify">
-						The emulation device accepts an emulation command from the master device and converts it
+                    </p>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="fa fa-plug fa-big"></div>
+                    <h4>Isotope</h4>
+                    <p class="text-justify">
+                        The emulation device accepts an emulation command from the master device and converts it
                         into a form which is understandable by the host device - using the USB HID specification
                         as a basis for this.
-					</p>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="fa fa-laptop fa-big"></div>
-					<h4>Host Device</h4>
-					<p class="text-justify">
-						The host device implements a USB HID host mode driver and will automatically interpret the
+                    </p>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="fa fa-laptop fa-big"></div>
+                    <h4>Host Device</h4>
+                    <p class="text-justify">
+                        The host device implements a USB HID host mode driver and will automatically interpret the
                         emulation commands it receives as though they were true user input. This makes Isotope
                         almost completely indistinguishable from a standard mouse and keyboard.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-	<section id="demo1" class="parallax" slide>
-		<div class="background" style="background: #fff"></div>
+    <section id="demo1" class="parallax" slide>
+        <div class="background" style="background: #fff"></div>
 
-		<div class="container fill">
-			<div class="row featurette">
-				<div class="col-xs-12 text-center">
-					<h2>
-						<i class="fa fa-rocket fa-huge"></i>
-						<br>
-						Demonstration
-					</h2>
-					<p class="lead">Let's have some fun with Isotope to show off what it can do</p>
-				</div>
-			</div>
+        <div class="container fill">
+            <div class="row featurette">
+                <div class="col-xs-12 text-center">
+                    <h2>
+                        <i class="fa fa-rocket fa-huge"></i>
+                        <br>
+                        Demonstration
+                    </h2>
+                    <p class="lead">Let's have some fun with Isotope to show off what it can do</p>
+                </div>
+            </div>
 
-			<hr style="border-color: rgba(0,0,0,0.1)">
+            <hr style="border-color: rgba(0,0,0,0.1)">
 
-			<div class="row">
-				<div class="col-sm-4 text-center">
-					<div class="row">
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <div class="row">
                         <div class="fa fa-crosshairs fa-big"></div>
                         <h4>Mouse Emulation</h4>
                         <p class="text-justify">
@@ -162,12 +162,12 @@
                             from your web browser.
                         </p>
                     </div>
-					<div class="row text-center">
+                    <div class="row text-center">
                         <a class="btn btn-default btn-lg" ng-click="api('mouse', { y: -5 })">
                             <i class="fa fa-long-arrow-up"></i>
                         </a>
                     </div>
-					<div class="row btn-group btn-group-lg">
+                    <div class="row btn-group btn-group-lg">
                         <div class="col-sm-4 btn btn-default" ng-click="api('mouse', { x: -5 })">
                             <i class="fa fa-long-arrow-left"></i>
                         </div>
@@ -178,89 +178,89 @@
                             <i class="fa fa-long-arrow-right"></i>
                         </div>
                     </div>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="fa fa-font fa-big"></div>
-					<h4>Keyboard Emulation</h4>
-					<p class="text-justify">
-						Keyboard emulation allows you to easily set whatever keys you want to be "pressed"
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="fa fa-font fa-big"></div>
+                    <h4>Keyboard Emulation</h4>
+                    <p class="text-justify">
+                        Keyboard emulation allows you to easily set whatever keys you want to be "pressed"
                         by the virtual keyboard. Click on any of the buttons below to try it out, or click
                         <i class="fa fa-undo"></i> to clear the currently pressed keys.
-					</p>
+                    </p>
                     
-					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Click Here" ng-focus="api('keyboard', { keys: ['a'] })" ng-blur="api('keyboard', { })"/>
-					</div>
-					
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Click Here" ng-focus="api('keyboard', { keys: ['a'] })" ng-blur="api('keyboard', { })"/>
+                    </div>
+                    
                     <div class="btn-group btn-group-lg">
                         <a class="btn btn-default" ng-click="api('keyboard', { keys: ['a'] })">a</a>
                         <a class="btn btn-default" ng-click="api('keyboard', { keys: ['a'], modifiers: ['shift'] })">A</a>
                         <a class="btn btn-default" ng-click="api('keyboard', { keys: ['delete'], modifiers: ['ctrl', 'alt'], release: true })">Ctrl+Alt+Delete</a>
                         <a class="btn btn-info" ng-click="api('keyboard', { })"><i class="fa fa-undo"></i></a>
                     </div>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="fa fa-text-width fa-big"></div>
-					<h4>Text Entry</h4>
-					<p class="text-justify">
-						The Isotope APIs also provide functionality for transcribing ASCII strings using
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="fa fa-text-width fa-big"></div>
+                    <h4>Text Entry</h4>
+                    <p class="text-justify">
+                        The Isotope APIs also provide functionality for transcribing ASCII strings using
                         typeable characters. Here's a demo of a simple Lorem Ipsum Dolor generator which
                         will type out a couple of sentences in Latin.
                     </p>
                     
                     <a class="btn btn-default btn-lg" ng-click="api('write', { text: loremIpsum(50, 200) })">Lorem Ipsum</a>
-				</div>
-			</div>
-		</div>
-	</section>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <section id="libraries" class="parallax" slide>
-		<div class="background" style="background-image: linear-gradient(-75deg, #283048, #859398)"></div>
+        <div class="background" style="background-image: linear-gradient(-75deg, #283048, #859398)"></div>
 
-		<div class="container fill" style="color: #fff">
-			<div class="row featurette">
-				<div class="col-xs-12 text-center">
-					<h2>
-						<i class="fa fa-code fa-huge"></i>
-						<br>
-						Software Libraries
-					</h2>
-					<p class="lead">How can you integrate Isotope with your software?</p>
-				</div>
-			</div>
+        <div class="container fill" style="color: #fff">
+            <div class="row featurette">
+                <div class="col-xs-12 text-center">
+                    <h2>
+                        <i class="fa fa-code fa-huge"></i>
+                        <br>
+                        Software Libraries
+                    </h2>
+                    <p class="lead">How can you integrate Isotope with your software?</p>
+                </div>
+            </div>
 
-			<hr style="border-color: rgba(255,255,255,0.1)">
+            <hr style="border-color: rgba(255,255,255,0.1)">
 
-			<div class="row">
-				<div class="col-sm-4 text-center">
-					<div class="fa fa-file-code-o fa-big"></div>
-					<h4>C-Library</h4>
-					<p class="text-justify">
-						The C-Library provides a low level API through which you can easily access the Isotope
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <div class="fa fa-file-code-o fa-big"></div>
+                    <h4>C-Library</h4>
+                    <p class="text-justify">
+                        The C-Library provides a low level API through which you can easily access the Isotope
                         device from both C and C++ code, as well as any framework which provides C interop.
                         It operates synchronously and includes a high performance rate limiter to prevent performance
                         issues.
-					</p>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="fa fa-cloud fa-big"></div>
-					<h4>Node.js Library</h4>
-					<p class="text-justify">
-						The Node.js library allows you to easily access Isotope from a high performance, asynchronous
+                    </p>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="fa fa-cloud fa-big"></div>
+                    <h4>Node.js Library</h4>
+                    <p class="text-justify">
+                        The Node.js library allows you to easily access Isotope from a high performance, asynchronous
                         scripting language. Node.js is perfect as a loose-coupler for a multitude of services and makes
                         rapid prototyping a breeze. (This website is powered by 70 lines of Node.js code)
-					</p>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="fa fa-terminal fa-big"></div>
-					<h4>Terminal Tools</h4>
-					<p class="text-justify">
-						There's also a number of terminal tools which allow you to easily control an Isotope device
+                    </p>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="fa fa-terminal fa-big"></div>
+                    <h4>Terminal Tools</h4>
+                    <p class="text-justify">
+                        There's also a number of terminal tools which allow you to easily control an Isotope device
                         from the command line or bash scripts. This makes testing incredibly easy and even lets you 
                         pipe the output of other commands into the transcription functions.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 </section>

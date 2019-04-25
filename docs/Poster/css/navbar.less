@@ -1,0 +1,90 @@
+.navbar {
+	-webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+	box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+	background: #222;
+	border: none;
+	z-index: 3;
+	color: #fff;
+	-moz-transition: color 0.5s;
+	-webkit-transition: color 0.5s;
+	transition: color 0.5s;
+
+	a {
+		color: #fff;
+
+		&:active,
+		&:hover,
+		&:focus {
+			color: #1FB3FF;
+		}
+	}
+
+	.nav {
+		li.active {
+			a {
+				color: #1FB3FF;
+				background: transparent;
+			}
+		}
+
+		li a:active,
+		li a:hover,
+		li a:focus {
+			background: transparent;
+		}
+	}
+
+	.navbar-brand {
+		padding: 0 15px;
+		height: 56px;
+		color: #666;
+		background: #fafafa;
+		background-image: -webkit-linear-gradient(#fff, #f2f2f2);
+		background-image: linear-gradient(#fff, #f2f2f2);
+	}
+
+	.navbar-toggle {
+		color: #fff;
+		-moz-transition: color 0.5s;
+		-webkit-transition: color 0.5s;
+		transition: color 0.5s;
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: #1FB3FF;            
+		}
+	}
+
+	.navbar-right {
+		&:last-child {
+			margin-right: 0 !important;
+		}
+	}
+}
+
+.logo {
+	background: url('/logo.svg') no-repeat;
+	-moz-background-size: contain;
+	-o-background-size: contain;
+	-webkit-background-size: contain;
+	background-size: contain;
+	width: 160px;
+	height: 40px;
+	margin: 10px;
+	margin-top: 14px;
+}
+
+@media (min-width: @screen-sm) { 
+	.logo {
+		margin-top: 10px !important;
+	}
+	
+	.navbar {
+		height: 50px;
+
+		.navbar-brand {
+			height: 50px;
+		}
+	}
+}

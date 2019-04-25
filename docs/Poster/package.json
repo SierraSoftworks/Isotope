@@ -1,0 +1,8 @@
+{
+	"name": "isotope_poster",
+	"description": "A poster for Isotope, designed in HTML using Bootstrap",
+	"version": "1.0.0",
+	"dependencies": {
+		"express": "4.x"	
+	}
+}
